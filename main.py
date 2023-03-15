@@ -22,13 +22,14 @@ class Game:
         font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
         text = font.render("FPS: " + str(int(self.clock.get_fps())), 1, (200,200,200))
         self.screen.blit(text, (10,10))
+        self.constants.actual_fps = self.clock.get_fps()
 
     def cutscene(self):
         pass
 
     def run(self):
         while self.constants.running:
-            self.clock.tick(self.constants.fps)
+            self.constants.dt = self.clock.tick(self.constants.fps)
             if self.constants.state == 0:
                 self.menu.check_events()
                 self.menu.update()

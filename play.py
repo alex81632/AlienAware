@@ -2,12 +2,20 @@ import pygame as pg
 import sys
 from constants import Constants
 from hud import HUD
+from player import Player
+from gameMap import GameMap
+from objectRender import ObjectRender
+from rayCasting import RayCasting
 
 class Play:
     def __init__(self, screen, constants):
         self.screen = screen
         self.constants = constants
         self.HUD = HUD(self.screen, self.constants)
+        self.player = Player(self)
+        self.gameMap = GameMap(self)
+        self.objectRender = ObjectRender(self)
+        self.raycasting = RayCasting(self)
 
     def check_events(self):
         for event in pg.event.get():
@@ -17,10 +25,10 @@ class Play:
                 self.constants.state = 2
 
     def update(self):
-        pass
+        self.player.update()
+        self.raycasting.update()
+        pg.display.flip()
 
     def draw(self):
-        self.screen.fill((80,80,80))
-        # draw point at center of screen
-        pg.draw.circle(self.screen, 'white', (self.constants.half_width, self.constants.half_height), 3)
-        self.HUD.draw()    
+        self.objectRender.draw()
+        self.HUD.draw()        
