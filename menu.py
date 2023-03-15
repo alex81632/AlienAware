@@ -1,6 +1,4 @@
 import pygame as pg
-import sys
-from constants import Constants
 import math
 
 class Menu:
@@ -28,6 +26,8 @@ class Menu:
                 if event.key == pg.K_RETURN:
                     if self.selected == 0:
                         self.constants.state = 1
+                    elif self.selected == 1:
+                        self.constants.state = 3
                     elif self.selected == 2:
                         self.constants.running = False
     

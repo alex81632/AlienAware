@@ -46,4 +46,14 @@ class Constants:
         self.max_mouse = 40
         self.left_border_mouse = 100
         self.right_border_mouse = self.width - self.left_border_mouse
+
+        # sound
+        self.sound_volume = 1
+
+    def redefine_fov(self, fov):
+        self.player_fov_scale = fov
+        self.player_fov = self.player_fov_scale*math.pi/180
+        self.player_fov_half = self.player_fov/2
+        self.ray_angle = self.player_fov//self.total_rays
+        self.wall_distance = self.half_height/math.tan(self.player_fov_half)
         

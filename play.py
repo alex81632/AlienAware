@@ -1,6 +1,4 @@
 import pygame as pg
-import sys
-from constants import Constants
 from hud import HUD
 from player import Player
 from gameMap import GameMap

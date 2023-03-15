@@ -1,6 +1,5 @@
 import pygame as pg
 import math
-from constants import Constants
 
 class Player:
     def __init__(self, game):
