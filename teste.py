@@ -1,24 +1,40 @@
-import pyttsx3
+import turtle
 
-# Inicializa o motor de fala
-engine = pyttsx3.init()
+# função para desenhar um quadrado
 
-# Define a velocidade do motor de fala
+def quadrado(tamanho):
+    for i in range(4):
+        turtle.forward(tamanho)
+        turtle.left(90)
 
-engine.setProperty('rate', 150)
+# função para desenhar um triângulo
 
-# Define o volume do motor de fala
+def triangulo(tamanho):
+    for i in range(3):
+        turtle.forward(tamanho)
+        turtle.left(120)
 
-engine.setProperty('volume', 1.0)
+# função para desenhar um círculo
 
-# Define o idioma do motor de fala
+def circulo(tamanho):
+    turtle.circle(tamanho)
 
-engine.setProperty('voice', 'brazil')
+# fazer um circulo dentro de um triângulo
 
-# Fala a frase
+def circulo_triangulo(tamanho):
+    triangulo(tamanho)
+    turtle.penup()
+    turtle.forward(tamanho//2)
+    turtle.pendown()
+    circulo(tamanho//4)
 
-engine.say("Olá Mundo! Estou testando as funções do módulo pyttsx3.")
+circulo_triangulo(100)
 
-# Executa o motor de fala
+# fazer uma linha no meio do triângulo
 
-engine.runAndWait()
+turtle.left(90)
+turtle.forward(80)
+
+# terminar
+
+turtle.mainloop()
