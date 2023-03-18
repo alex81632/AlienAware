@@ -17,12 +17,14 @@ class Game:
         self.pause = Pause(self.screen, self.constants)
         self.play = Play(self.screen, self.constants)
         self.settings = Settings(self.screen, self.constants)
-        # 0 = menu, 1 = game, 2 = pause, 3 = cutscene
+        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
+        # 0 = menu, 1 = game, 2 = pause, 3 = settings, 4 = cutscene
 
     def display_fps(self):
         # display fps at the top of the screen
-        font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
-        text = font.render("FPS: " + str(int(self.clock.get_fps())), 1, (200,200,200))
+        text = self.font.render("FPS: " + str(int(self.clock.get_fps())), 1, (200,200,200))
+        # fundo preto para o texto do tamanho do texto
+        pg.draw.rect(self.screen, (0,0,0), (10,10, text.get_width(), text.get_height()))
         self.screen.blit(text, (10,10))
         self.constants.actual_fps = self.clock.get_fps()
 

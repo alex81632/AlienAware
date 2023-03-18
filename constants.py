@@ -31,7 +31,7 @@ class Constants:
         # raycasting
         self.total_rays = self.width//2
         self.half_total_rays = self.total_rays//2
-        self.ray_angle = self.player_fov//self.total_rays
+        self.ray_angle = self.player_fov/self.total_rays
         self.max_depth = 20
         self.wall_distance = self.half_height/math.tan(self.player_fov_half)
         self.scale = self.width//self.total_rays
@@ -54,6 +54,6 @@ class Constants:
         self.player_fov_scale = fov
         self.player_fov = self.player_fov_scale*math.pi/180
         self.player_fov_half = self.player_fov/2
-        self.ray_angle = self.player_fov//self.total_rays
+        self.ray_angle = self.player_fov/self.total_rays
         self.wall_distance = self.half_height/math.tan(self.player_fov_half)
         
