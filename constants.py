@@ -9,7 +9,7 @@ class Constants:
         self.half_height = height // 2
         self.resolution = (width, height)
         self.pixel = math.ceil(width / 1920)
-        self.fps = 144
+        self.fps = 60
         self.actual_fps = 1
         self.running = True
         self.state = 0
