@@ -18,9 +18,26 @@ class Constants:
         self.random = np.random.RandomState(0)
         self.dt = 1
 
+        # map
+        self.map_width = 21
+        self.map_height = 80
+        self.textures_size = 256
+        self.half_textures_size = self.textures_size//2
+        self.floor_color = (30, 30, 30)
+        self.minimap_size = 200*self.pixel
+        self.minimap_background_color = (255, 255, 255)
+        self.minimap_wall_color = (0, 0, 0)
+        self.minimap_player_color = (255, 0, 0)
+        self.minimap_scale = self.minimap_size/11
+        self.minimap_player_radius = 5*self.pixel
+        self.minimap_position_x = self.width - self.minimap_size - self.padding
+        self.minimap_position_y = self.padding
+        self.minimap_player_line_width = 2*self.pixel
+
         # player
-        self.player_initial_position = 1.5, 1.5
-        self.player_initial_angle = 0
+        self.player_initial_position = self.map_width/2, 1.5
+        print(self.player_initial_position)
+        self.player_initial_angle = math.pi/2
         self.player_speed = 0.004
         self.player_rotation_speed = 0.002
         self.player_fov_scale = 60
@@ -35,11 +52,6 @@ class Constants:
         self.max_depth = 20
         self.wall_distance = self.half_height/math.tan(self.player_fov_half)
         self.scale = self.width//self.total_rays
-
-        # map
-        self.textures_size = 256
-        self.half_textures_size = self.textures_size//2
-        self.floor_color = (30, 30, 30)
 
         # mouse
         self.mouse_sensitivity = 0.0003

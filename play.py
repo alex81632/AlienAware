@@ -4,6 +4,7 @@ from player import Player
 from gameMap import GameMap
 from objectRender import ObjectRender
 from rayCasting import RayCasting
+from minimap import MiniMap
 
 class Play:
     def __init__(self, screen, constants):
@@ -12,6 +13,7 @@ class Play:
         self.HUD = HUD(self.screen, self.constants)
         self.player = Player(self)
         self.gameMap = GameMap(self)
+        self.miniMap = MiniMap(self)
         self.objectRender = ObjectRender(self)
         self.raycasting = RayCasting(self)
 
@@ -29,4 +31,5 @@ class Play:
 
     def draw(self):
         self.objectRender.draw()
+        self.miniMap.draw()
         self.HUD.draw()        

@@ -43,9 +43,6 @@ class Player:
         if self.wall_colision(int(self.x), int(self.y + dy*escala)):
             self.y += dy
 
-    def draw(self):
-        pg.draw.circle(self.game.screen, 'blue', (self.x*100, self.y*100), 15)
-
     def mouse_control(self):
         mx,my = pg.mouse.get_pos()
         if mx < self.game.constants.left_border_mouse or mx>self.game.constants.right_border_mouse:

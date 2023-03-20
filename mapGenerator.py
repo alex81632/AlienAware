@@ -1,21 +1,9 @@
-import pygame as pg
-import random
 import numpy as np
+import random
 
+# criar um mapa de 0 e 1s com 0s sendo caminhos e 1s sendo paredes
+# 0 = caminho, 1 = parede
 
-class GameMap:
-    def __init__(self, game):
-        self.game = game
-        self.game_map = generate_map(self.game.constants.map_height, self.game.constants.map_width)
-        self.map_complt  = {}
-        self.const_mapa()
-
-    def const_mapa(self):
-        for i,coluna in enumerate(self.game_map):
-            for j, valor in enumerate(coluna):
-                if valor == 1:
-                    self.map_complt[(j,i)] = valor
-    
 # o algorítmo de geração de mapas é feito com base em uma dfs para gerar um labirinto
 
 def generate_map(width, height):
@@ -55,12 +43,12 @@ def generate_map(width, height):
         return generate_map(width, height)
 
     # se não for possível chegar em algum ponto, esse ponto é transformado em uma parede
-    for i in range(width):
-        for j in range(height):
-            if (i,j) not in visited:
-                map_[i][j] = 1
+    # for i in range(width):
+    #     for j in range(height):
+    #         if (i,j) not in visited:
+    #             map_[i][j] = 1
 
-    #print_map(map_, visited)
+    print_map(map_, visited)
 
     return map_
 
@@ -110,17 +98,18 @@ def dfs(map_, x, y, visited={}, stack=[]):
             if y-1 > 0 and map_[x][y-1] != 1:
                 stack.append((x,y-1))
         # se chegou no ponto de saída, retorna
-        # if current == (len(map_)-2, len(map_[0])//2):
-        #     return
+        if current == (len(map_)-2, len(map_[0])//2):
+            return
 
 def print_map(map_, visited={}):
     for i in range(len(map_)):
         for j in range(len(map_[i])):
             # se tiver em visited, printa #
-            if (i,j) in visited:
-                print(" # ", end="")
-            elif map_[i][j] == 0:
+            if map_[i][j] == 0:
                 print(" _ ", end="")
             else:
                 print(" 1 ", end="")
         print()
+
+generate_map(40, 11)
+
