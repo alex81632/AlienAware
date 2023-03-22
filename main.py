@@ -5,6 +5,7 @@ from menu import Menu
 from pause import Pause
 from play import Play
 from settings import Settings
+from mapTransitions import mapTransitions
 
 class Game:
     def __init__(self):
@@ -17,6 +18,7 @@ class Game:
         self.pause = Pause(self.screen, self.constants)
         self.play = Play(self.screen, self.constants)
         self.settings = Settings(self.screen, self.constants)
+        self.mapTransitions = mapTransitions(self.screen, self.constants)
         self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
         # 0 = menu, 1 = game, 2 = pause, 3 = settings, 4 = cutscene
 
@@ -47,6 +49,8 @@ class Game:
                 self.settings.check_events()
                 self.settings.update()
                 self.settings.draw()
+            elif self.constants.state == 4:
+                self.mapTransitions.draw()
             self.display_fps()
             pg.display.flip()
         pg.quit()
