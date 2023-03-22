@@ -42,12 +42,12 @@ class Constants:
         # player
         self.player_initial_position = self.map_width/2, 1.5
         self.player_initial_angle = math.pi/2
-        self.player_speed = 0.002
+        self.player_speed = 0.004
         self.player_rotation_speed = 0.002
         self.player_fov_scale = 60
         self.player_fov = self.player_fov_scale*math.pi/180
         self.player_fov_half = self.player_fov/2
-        self.player_scale = 60
+        self.player_scale = 200*self.pixel
 
         # raycasting
         self.total_rays = self.width//2

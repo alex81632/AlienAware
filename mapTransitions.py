@@ -15,5 +15,5 @@ class mapTransitions:
         # texto no centro da tela
         self.screen.blit(self.text, (self.constants.width/2 - self.text.get_width()/2, self.constants.height/2 - self.text.get_height()/2))
         # se passou 3 segundos, volta ao jogo
-        if time.time() - self.constants.time > 3:
+        if time.time() - self.constants.time > 1:
             self.constants.state = 1
