@@ -17,6 +17,8 @@ class Play:
         self.miniMap = MiniMap(self)
         self.objectRender = ObjectRender(self)
         self.raycasting = RayCasting(self)
+        self.overlay = pg.image.load('assets/overlays/gameOverlay.png')
+        self.overlay = pg.transform.scale(self.overlay, (self.constants.width, self.constants.height))
 
     def check_events(self):
         for event in pg.event.get():
@@ -49,5 +51,6 @@ class Play:
         
     def draw(self):
         self.objectRender.draw()
+        self.screen.blit(self.overlay, (0,0))
         self.miniMap.draw()
         self.HUD.draw()        
