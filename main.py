@@ -26,8 +26,8 @@ class Game:
         # display fps at the top of the screen
         text = self.font.render("FPS: " + str(int(self.clock.get_fps())), 1, (200,200,200))
         # fundo preto para o texto do tamanho do texto
-        pg.draw.rect(self.screen, (0,0,0), (10,10, text.get_width(), text.get_height()))
-        self.screen.blit(text, (10,10))
+        pg.draw.rect(self.screen, (0,0,0), (10,self.screen.get_height()-text.get_height()-10, text.get_width(), text.get_height()))
+        self.screen.blit(text, (10,self.screen.get_height()-text.get_height()-10))
         self.constants.actual_fps = self.clock.get_fps()
 
     def run(self):

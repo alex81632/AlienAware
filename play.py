@@ -29,6 +29,8 @@ class Play:
             if event.type == pg.KEYDOWN and event.key == pg.K_m:
                 self.constants.minimap_state = not self.constants.minimap_state
                 self.constants.resize_minimap(self.constants.minimap_state)
+            if event.type == pg.KEYDOWN and event.key == pg.K_h:
+                self.constants.player_health -= 1
 
     def update(self):
         self.player.update()

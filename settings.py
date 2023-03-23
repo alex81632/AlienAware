@@ -52,7 +52,7 @@ class Settings:
             text = self.font.render("Estado so Som", 1, (255,255,255))
             data = self.font.render(self.sound_volume_state, 1, (255,255,255))
         self.screen.blit(text, (self.constants.half_width - self.constants.padding*10, self.constants.half_height - text.get_height()//2 ))
-        self.screen.blit(data, (self.constants.half_width + self.constants.padding*10, self.constants.half_height - text.get_height()//2 ))
+        self.screen.blit(data, (self.constants.half_width + self.constants.padding*10 - data.get_width()//2, self.constants.half_height - text.get_height()//2 ))
         if self.selected == 1:
             text = self.font.render("Campo de Visão", 1, (255,0,0))
             data = self.font.render(str(self.fov), 1, (255,0,0))
@@ -60,7 +60,7 @@ class Settings:
             text = self.font.render("Campo de Visão", 1, (255,255,255))
             data = self.font.render(str(self.fov), 1, (255,255,255))
         self.screen.blit(text, (self.constants.half_width - self.constants.padding*10, self.constants.half_height - text.get_height()//2 + self.constants.padding*2))
-        self.screen.blit(data, (self.constants.half_width + self.constants.padding*10, self.constants.half_height - text.get_height()//2 + self.constants.padding*2))
+        self.screen.blit(data, (self.constants.half_width + self.constants.padding*10 - data.get_width()//2, self.constants.half_height - text.get_height()//2 + self.constants.padding*2))
         if self.constants.state != 2:
             self.first = True
 
