@@ -6,6 +6,10 @@ class MiniMap:
         self.game = game
         self.map = self.game.gameMap.map_inversed
         self.player = self.game.player
+        # fazer um dicionario com as coordenadas do mapa e uma escala de 0 até 3 para o alfa se o jogador já passou por perto
+        self.map_alpha = {}
+        for x,y in self.map:
+            self.map_alpha[(x,y)] = 0
         
     def draw(self):
         # desenhar o mini mapa no canto direito da tela
@@ -21,7 +25,15 @@ class MiniMap:
             yoffset = (y - self.player.y) * self.game.constants.minimap_scale + self.game.constants.minimap_size//2
             xoffset = (x - self.player.x) * self.game.constants.minimap_scale + self.game.constants.minimap_size//2
 
-            pg.draw.rect(mini_map, self.game.constants.minimap_wall_color, (xoffset-1, yoffset-1, self.game.constants.minimap_scale+1, self.game.constants.minimap_scale+1))
+            # se a distância estiver a menos de 10 blocos, aumentar alfa para 1
+            if math.sqrt((x-self.player.x)**2 + (y-self.player.y)**2) < 5 and self.map_alpha[(x,y)] == 0:
+                self.map_alpha[(x,y)] = 1
+            # se a distância estiver a menos de 5 blocos, aumentar alfa para 3
+            if math.sqrt((x-self.player.x)**2 + (y-self.player.y)**2) < 2 and self.map_alpha[(x,y)] == 1:
+                self.map_alpha[(x,y)] = 3
+            # desenhar o bloco no mini mapa com a cor e o alfa correspondente
+            c = self.map_alpha[(x,y)]*85
+            pg.draw.rect(mini_map, (c, c, c) , (xoffset-1, yoffset-1, self.game.constants.minimap_scale+1, self.game.constants.minimap_scale+1))
 
         # inverter os eixos do mini mapa
         mini_map = pg.transform.flip(mini_map, True, True)
