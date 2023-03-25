@@ -16,14 +16,14 @@ class ObjectHandler:
 
         # spawn npc
         # self.enemies = 20  # npc count
-        # self.npc_types = [SoldierNPC, CacoDemonNPC, CyberDemonNPC]
-        # self.weights = [70, 20, 10]
+        self.enemy_types = [SoldierNPC, CacoDemonNPC]
+        self.weights = [70, 30]
         # self.restricted_area = {(i, j) for i in range(10) for j in range(10)}
         # self.spawn_npc()
 
         # sprite map
-        add_sprite(AnimatedSprite(game))
-        add_sprite(SpriteObject(game))
+        # add_sprite(AnimatedSprite(game))
+        # add_sprite(SpriteObject(game))
         # add_sprite(AnimatedSprite(game, pos=(1.5, 1.5)))
         # add_sprite(AnimatedSprite(game, pos=(1.5, 7.5)))
         # add_sprite(AnimatedSprite(game, pos=(5.5, 3.25)))
@@ -64,6 +64,31 @@ class ObjectHandler:
     #                 pos = x, y = randrange(self.game.map.cols), randrange(self.game.map.rows)
     #             self.add_npc(npc(self.game, pos=(x + 0.5, y + 0.5)))
 
+    def spawn_enemies(self, number):
+        for i in range(number):
+            enemy = choices(self.enemy_types, self.weights)[0]
+            x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
+            while (x, y) not in self.game.gameMap.map_inversed:
+                x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
+
+            try:
+                print(self.game.gameMap.invert_map[x][y])
+                print('foi')
+            except:
+                pass
+            print((x, y))
+            print(self.game.gameMap.game_map[x][y])
+            self.add_enemy(enemy(self.game, pos=(x, y)))
+
+            # while True:
+            #     try:
+            #         if self.game.gameMap.invert_map[x][y] == 0:
+            #            break 
+            #     except:
+            #         x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
+
+            
+
     # def check_win(self):
     #     if not len(self.npc_positions):
     #         self.game.object_renderer.win()
@@ -76,6 +101,9 @@ class ObjectHandler:
         [sprite.update() for sprite in self.sprite_list]
         [enemy.update() for enemy in self.enemies_list]
         # self.check_win()
+    
+    def remove_enemies(self):
+        self.enemies_list = []
 
     def add_enemy(self, enemy):
         self.enemies_list.append(enemy)
