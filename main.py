@@ -7,6 +7,7 @@ from play import Play
 from settings import Settings
 from mapTransitions import mapTransitions
 
+
 class Game:
     def __init__(self):
         pg.init()

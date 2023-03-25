@@ -48,7 +48,7 @@ class Constants:
         self.player_fov = self.player_fov_scale*math.pi/180
         self.player_fov_half = self.player_fov/2
         self.player_scale = 200*self.pixel
-        self.player_health = 50
+        self.player_health = 100
         self.player_max_health = 100
         self.player_coins = 0
 

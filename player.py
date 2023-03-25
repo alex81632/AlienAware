@@ -7,6 +7,19 @@ class Player:
         self.x, self.y = self.game.constants.player_initial_position
         self.angle = self.game.constants.player_initial_angle
         self.rel = 0
+        self.fire = False
+
+    def get_damage(self, damage):
+        self.game.constants.player_health -= damage
+        self.game.objectRender.player_damage()
+        self.game.sound.player_pain.play()
+    
+    def single_fire_event(self, event):
+        if event.type == pg.MOUSEBUTTONDOWN:
+            if event.button == 1 and not self.fire and not self.game.weapon.reloading:
+                self.game.sound.shotgun.play()
+                self.fire = True
+                self.game.weapon.reloading = True
 
     def moviment(self):
         sen_a = math.sin(self.angle)
