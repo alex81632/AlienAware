@@ -8,6 +8,7 @@ from settings import Settings
 from mapTransitions import mapTransitions
 from habilityTree import HabilityTree
 
+
 class Game:
     def __init__(self):
         pg.init()
