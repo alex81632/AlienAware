@@ -10,6 +10,7 @@ from objectHandler import ObjectHandler
 from weapon import Weapon
 from sound import Sound
 from pathFinding import PathFinding
+from enemies import *
 
 class Play:
     def __init__(self, screen, constants):
@@ -64,6 +65,9 @@ class Play:
             self.constants.time = time.time()
             # atualiza o mapa para o próximo            
             self.gameMap.next_map()
+            self.object_handler.remove_enemies()
+            self.pathfinding = PathFinding(self)
+            self.object_handler.spawn_enemies(3)
             # atualiza o jogador para a nova posição
             self.player.x, self.player.y = self.constants.player_initial_position
             self.player.angle = self.constants.player_initial_angle
