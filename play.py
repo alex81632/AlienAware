@@ -26,6 +26,8 @@ class Play:
                 self.constants.running = False
             if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 self.constants.state = 2
+            if event.type == pg.KEYDOWN and event.key == pg.K_t:
+                self.constants.state = 5
             if event.type == pg.KEYDOWN and event.key == pg.K_m:
                 self.constants.minimap_state = not self.constants.minimap_state
                 self.constants.resize_minimap(self.constants.minimap_state)

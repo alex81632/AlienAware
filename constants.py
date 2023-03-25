@@ -50,7 +50,7 @@ class Constants:
         self.player_scale = 200*self.pixel
         self.player_health = 50
         self.player_max_health = 100
-        self.player_coins = 0
+        self.player_coins = 3000
 
         # raycasting
         self.total_rays = self.width//2
