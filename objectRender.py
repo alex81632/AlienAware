@@ -39,4 +39,4 @@ class ObjectRender:
         return pg.transform.scale(texture, res)
 
     def load_textures(self):
-        return{1: self.get_textures('Recursos\Texturas\pedro.png')}
+        return{1: self.get_textures('Recursos\Texturas\pxp10.png')}
