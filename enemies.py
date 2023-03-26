@@ -25,6 +25,7 @@ class Inimigo(AnimatedSprite):
         self.ray_cast_value = False
         self.frame_counter = 0
         self.player_search_trigger = False
+        self.resourse = 100
 
     def update(self):
         self.check_animation_time()
@@ -80,9 +81,11 @@ class Inimigo(AnimatedSprite):
                 self.check_health()
 
     def check_health(self):
-        if self.health < 1:
-            self.alive = False
-            self.game.sound.enemy_death.play()
+        if self.alive:
+            if self.health < 1:
+                self.alive = False
+                self.game.sound.enemy_death.play()
+                self.game.constants.player_coins += self.resourse
 
     def run_logic(self):
         if self.alive:
@@ -133,7 +136,7 @@ class Inimigo(AnimatedSprite):
         # horizontals
         y_hor, dy = (y_map + 1, 1) if sin_a > 0 else (y_map - 1e-6, -1)
 
-        depth_hor = (y_hor - oy) / sin_a
+        depth_hor = (y_hor - oy) / (sin_a + 1e-6)
         x_hor = ox + depth_hor * cos_a
 
         delta_depth = dy / sin_a
@@ -200,6 +203,7 @@ class CacoDemonNPC(Inimigo):
         self.attack_damage = 25
         self.speed = 0.05
         self.accuracy = 0.35
+        self.resourse = 100
 
 # class CyberDemonNPC(Inimigo):
 #     def __init__(self, game, path='resources/sprites/npc/cyber_demon/0.png', pos=(11.5, 6.0),

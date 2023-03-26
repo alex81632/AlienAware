@@ -47,8 +47,7 @@ class ObjectHandler:
         # add_sprite(AnimatedSprite(game, pos=(1.5, 24.5)))
 
         # npc map
-        add_enemy(SoldierNPC(game, pos=(3, 3)))
-        add_enemy(SoldierNPC(game, pos=(4, 4)))
+        
         # add_npc(SoldierNPC(game, pos=(13.5, 6.5)))
         # add_npc(SoldierNPC(game, pos=(2.0, 20.0)))
         # add_npc(SoldierNPC(game, pos=(4.0, 29.0)))
@@ -71,24 +70,9 @@ class ObjectHandler:
             while (x, y) not in self.game.gameMap.map_inversed:
                 x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
 
-            try:
-                print(self.game.gameMap.invert_map[x][y])
-                print('foi')
-            except:
-                pass
-            print((x, y))
-            print(self.game.gameMap.game_map[x][y])
-            self.add_enemy(enemy(self.game, pos=(x, y)))
-
-            # while True:
-            #     try:
-            #         if self.game.gameMap.invert_map[x][y] == 0:
-            #            break 
-            #     except:
-            #         x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
+            self.add_enemy(enemy(self.game, pos=(x + 0.5, y + 0.5)))
 
             
-
     # def check_win(self):
     #     if not len(self.npc_positions):
     #         self.game.object_renderer.win()
