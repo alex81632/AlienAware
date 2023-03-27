@@ -139,7 +139,7 @@ class Inimigo(AnimatedSprite):
         depth_hor = (y_hor - oy) / (sin_a + 1e-6)
         x_hor = ox + depth_hor * cos_a
 
-        delta_depth = dy / sin_a
+        delta_depth = dy / (sin_a + 1e-6)
         dx = delta_depth * cos_a
 
         for i in range(self.game.constants.max_depth):

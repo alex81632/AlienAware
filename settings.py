@@ -7,7 +7,7 @@ class Settings:
         self.selected = 0
         self.num_options = 2
         self.first = True
-        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', self.constants.font_size)
+        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
         # importe o arquivo de imagem pauseOverlay.png da pasta assets/overlays
         self.pauseOverlay = pg.image.load('assets/overlays/settingsOverlay.png')
         # redimensione a imagem para o tamanho da tela
@@ -26,6 +26,7 @@ class Settings:
             if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 self.first = True
                 self.constants.state = 0
+                self.selected = 0
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_DOWN:
                     self.selected += 1

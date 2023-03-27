@@ -50,7 +50,7 @@ class Constants:
         self.player_scale = 200*self.pixel
         self.player_health = 100
         self.player_max_health = 100
-        self.player_coins = 3000
+        self.player_coins = 0
 
         # raycasting
         self.total_rays = self.width//2
@@ -73,6 +73,9 @@ class Constants:
         self.time = time.time()
 
         # inimigos
+
+        # control flow
+        self.return_to_menu = False
         
 
     def redefine_fov(self, fov):

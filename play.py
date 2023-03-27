@@ -39,7 +39,7 @@ class Play:
                 self.constants.running = False
             if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 self.constants.state = 2
-            if event.type == pg.KEYDOWN and event.key == pg.K_t:
+            if event.type == pg.KEYDOWN and event.key == pg.K_h and self.constants.mapa_atual == 0:
                 self.constants.state = 5
             if event.type == pg.KEYDOWN and event.key == pg.K_m:
                 self.constants.minimap_state = not self.constants.minimap_state
@@ -61,7 +61,7 @@ class Play:
         self.weapon.update()
         pg.display.flip()
         # se o jogador chegou ao fim do mapa, vai para o próximo
-        if self.player.y > self.constants.map_height - 2:
+        if self.player.y > self.constants.map_height - 1:
             # tela de transição
             self.constants.state = 4
             self.constants.time = time.time()
@@ -69,7 +69,25 @@ class Play:
             self.gameMap.next_map()
             self.object_handler.remove_enemies()
             self.pathfinding = PathFinding(self)
-            self.object_handler.spawn_enemies(3)
+            self.object_handler.spawn_enemies(10)
+            # atualiza o jogador para a nova posição
+            self.player.x, self.player.y = self.constants.player_initial_position
+            self.player.angle = self.constants.player_initial_angle
+
+            # atualiza o minimapa para a nova posição
+            self.miniMap = MiniMap(self)
+
+        # se a vida for menor que 0, volta pro mapa inicial
+        if self.constants.player_health <= 0 or self.constants.return_to_menu == True:
+            self.constants.player_health = self.constants.player_max_health
+            # tela de transição
+            self.constants.state = 4
+            self.constants.time = time.time()
+            # atualiza o mapa para o inicial
+            self.gameMap = GameMap(self)
+            # atualiza os inimigos
+            self.object_handler.remove_enemies()
+            self.pathfinding = PathFinding(self)
             # atualiza o jogador para a nova posição
             self.player.x, self.player.y = self.constants.player_initial_position
             self.player.angle = self.constants.player_initial_angle

@@ -5,7 +5,7 @@ import numpy as np
 _ = 0
 
 # sala inicial 10x10 com paredes em volta
-mapa_inicial = [[1,1,1,1,1,1,1,1,1,1,1]] + [[1,_,_,_,_,_,_,_,_,_,1] for i in range(9)] + [[1,1,1,1,1,_,1,1,1,1,1]] + [[1,1,1,1,1,1,1,1,1,1,1]]
+mapa_inicial = [[1,1,1,1,1,1,1,1,1,1,1]] + [[1,_,_,_,_,_,_,_,_,_,1] for i in range(9)] + [[1,1,1,1,1,_,1,1,1,1,1]]
 
 # sala final 20x20 com paredes em volta
 mapa_final = [[1]*21] + [[1]+[0]*19+[1] for i in range(19)] + [[1]*21]
@@ -15,6 +15,7 @@ class GameMap:
     def __init__(self, game):
         self.game = game
         self.game_map = mapa_inicial
+        self.game.constants.mapa_atual = 0
         self.game.constants.map_height = len(self.game_map)
         self.game.constants.map_width = len(self.game_map[0])
         self.game.constants.player_initial_position = self.game.constants.map_width/2, 1.5
@@ -24,7 +25,8 @@ class GameMap:
         self.invert_map()
     
     def next_map(self):
-        self.game.constants.map_height = 20
+        self.game.constants.map_height = 50
+        self.game.constants.map_width = 20
         self.game.constants.mapa_atual += 1
         if self.game.constants.mapa_atual == 3:
             self.game_map = mapa_final
@@ -92,6 +94,9 @@ class GameMap:
             for j in range(height):
                 if (i,j) not in visited:
                     map_[i][j] = 1
+
+        map_[width-1][height//2] = 0
+        map_ = np.append(map_, np.ones((1, height)), axis=0)
 
         self.print_map(map_, visited)
 

@@ -7,18 +7,19 @@ class HabilityTree:
     def __init__(self, screen, constants):
         self.screen = screen
         self.constants = constants
-        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', self.constants.font_size)
-        self.font_decription = pg.font.Font('assets/fonts/dogicapixel.ttf', self.constants.font_size//2)
-        self.font_title = pg.font.Font('assets/fonts/dogicapixel.ttf', self.constants.font_size*2)
+        self.padding = int(40*self.constants.pixel * (self.constants.width / 1920))
+        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
+        self.font_decription = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size)//2)
+        self.font_title = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size)*2)
         self.classes = []
         self.subClasses = []
         self.habilities = []
-        self.size = 50*self.constants.pixel
+        self.size = int(50*self.constants.pixel * (self.constants.width / 1920))
         self.selected = 0
         # temporariamente
         nome = 'accuracy'
         descricao = 'aumenta o dano da arma'
-        custo = 10
+        custo = 80
         # contruir arvore de habilidades
         #classes
         self.classes.append(self.hability(0, nome, descricao+"1", custo, -1, self.size, 5))
@@ -185,8 +186,12 @@ class HabilityTree:
                 self.classes[i].selected = True
             else:
                 self.classes[i].selected = False
+
+            # so atualiza se não foi comprado ainda
+            if self.classes[i].status == 2:
+                pass
             # se o status do pai for 2, e o dinheiro for maior que o custo, entao o status do filho passa a ser 1
-            if self.habilities_status[self.classes[i].father] == 2 and self.constants.player_coins >= self.classes[i].cost and self.classes[i].status == 0:
+            elif self.habilities_status[self.classes[i].father] == 2 and self.constants.player_coins >= self.classes[i].cost and self.classes[i].status == 0:
                 self.classes[i].status = 1
                 self.habilities_status[self.classes[i].id] = 1
             # se o status do pai for 2, e o dinheiro for menor que o custo, entao o status do filho passa a ser 0
@@ -207,8 +212,11 @@ class HabilityTree:
                 self.subClasses[i].selected = True
             else:
                 self.subClasses[i].selected = False
+            # so atualiza se não foi comprado ainda
+            if self.subClasses[i].status == 2:
+                pass
             # se o status do pai for 2, e o dinheiro for maior que o custo, entao o status do filho passa a ser 1
-            if self.habilities_status[self.subClasses[i].father] == 2 and self.constants.player_coins >= self.subClasses[i].cost and self.subClasses[i].status == 0:
+            elif self.habilities_status[self.subClasses[i].father] == 2 and self.constants.player_coins >= self.subClasses[i].cost and self.subClasses[i].status == 0:
                 self.subClasses[i].status = 1
                 self.habilities_status[self.subClasses[i].id] = 1
             # se o status do pai for 2, e o dinheiro for menor que o custo, entao o status do filho passa a ser 0
@@ -229,8 +237,12 @@ class HabilityTree:
                 self.habilities[i].selected = True
             else:
                 self.habilities[i].selected = False
+
+            # so atualiza se não foi comprado ainda
+            if self.habilities[i].status == 2:
+                pass
             # se o status do pai for 2, e o dinheiro for maior que o custo, entao o status do filho passa a ser 1
-            if self.habilities_status[self.habilities[i].father] == 2 and self.constants.player_coins >= self.habilities[i].cost and self.habilities[i].status == 0:
+            elif self.habilities_status[self.habilities[i].father] == 2 and self.constants.player_coins >= self.habilities[i].cost and self.habilities[i].status == 0:
                 self.habilities[i].status = 1
                 self.habilities_status[self.habilities[i].id] = 1
             # se o status do pai for 2, e o dinheiro for menor que o custo, entao o status do filho passa a ser 0
@@ -264,14 +276,14 @@ class HabilityTree:
     def draw_title(self):
         # desenhar o titulo na tela
         text = self.font_title.render("Árvore de Habilidades", True, (255,255,255))
-        self.screen.blit(text, (self.constants.width/2 - text.get_width()/2, self.constants.padding*2))
+        self.screen.blit(text, (self.constants.width/2 - text.get_width()/2, self.padding*2))
 
     def draw_description(self):
         # desenhar a descrição do selecionado na arvore no meio da tela em baixo
         if self.selected != -1:
             description = self.get_description(self.selected)
             text = self.font_decription.render("Descrição: "+description, True, (210,0,0))
-            self.screen.blit(text, (self.constants.width/2 - text.get_width()/2, self.constants.height - self.constants.padding - text.get_height()))
+            self.screen.blit(text, (self.constants.width/2 - text.get_width()/2, self.constants.height - self.padding - text.get_height()))
 
     def get_description(self, id):
         for i in range(len(self.classes)):
@@ -286,15 +298,15 @@ class HabilityTree:
 
     def draw_tree(self):
         space = (self.constants.width - 2*self.constants.padding)/11
-        x = self.constants.padding*2
-        y = self.constants.padding*8
+        x = self.padding*2
+        y = self.padding*8
         for i in range(len(self.classes)):
             xa = x + ((self.classes[i].hor_space-1)/2)*space
             self.classes[i].draw(self.screen, xa, y)
             self.classes[i].x = xa
             self.classes[i].y = y
             x += self.classes[i].hor_space*space
-        x = self.constants.padding*2
+        x = self.padding*2
         y += self.size*2
         for i in range(len(self.subClasses)):
             xa = x + ((self.subClasses[i].hor_space-1)/2)*space
@@ -302,13 +314,13 @@ class HabilityTree:
             self.subClasses[i].x = xa
             self.subClasses[i].y = y
             x += self.subClasses[i].hor_space*space
-        x = self.constants.padding*2
+        x = self.padding*2
         y += self.size*2
         x_max = x + (self.habilities_per_row-1)*space
         for i in range(len(self.habilities)):
             xa = x + ((self.habilities[i].hor_space-1)/2)*space
             if xa > x_max:
-                x = self.constants.padding*2
+                x = self.padding*2
                 y += self.size*2
                 xa = x + ((self.habilities[i].hor_space-1)/2)*space
             self.habilities[i].draw(self.screen, xa, y)
@@ -334,7 +346,7 @@ class HabilityTree:
     def draw_coins(self):
         # desenha moedas no canto direito inferior
         text = self.font.render("Recursos: "+str(self.constants.player_coins), True, (255,255,255))
-        self.screen.blit(text, (self.constants.width - text.get_width() - self.constants.padding, self.constants.height - text.get_height() - self.constants.padding))
+        self.screen.blit(text, (self.constants.width - text.get_width() - self.padding, self.constants.height - text.get_height() - self.padding))
 
     class hability:
         def __init__(self,id , name, description, cost, father, size, hor_space):

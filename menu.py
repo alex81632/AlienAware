@@ -9,7 +9,7 @@ class Menu:
         self.num_options = 3
         self.logo = pg.image.load('assets/overlays/logoMenu.png')
         self.logo = pg.transform.scale(self.logo, (self.constants.width, self.constants.height))
-        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', self.constants.font_size)
+        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
         self.stars = Stars(self.screen, self.constants)        
 
     def check_events(self):
@@ -26,10 +26,13 @@ class Menu:
                 if event.key == pg.K_RETURN:
                     if self.selected == 0:
                         self.constants.state = 1
+                        self.selected = 0
                     elif self.selected == 1:
                         self.constants.state = 3
+                        self.selected = 0
                     elif self.selected == 2:
                         self.constants.running = False
+                        self.selected = 0
     
     def update(self):
         self.stars.update()

@@ -8,7 +8,7 @@ class HUD:
         self.logo = pg.image.load('assets/images/logo_simplificada.png')
         self.scale = 70*self.constants.pixel
         self.logo = pg.transform.scale(self.logo, (self.scale, self.scale)).convert_alpha()
-        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', self.constants.font_size//3)
+        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size)//3)
 
     def draw(self):
         # desenhar a logo na tela

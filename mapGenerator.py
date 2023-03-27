@@ -50,6 +50,8 @@ def generate_map(width, height):
 
     print_map(map_, visited)
 
+    print(map_)
+
     return map_
 
 def alg_dir(map_):
