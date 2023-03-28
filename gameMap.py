@@ -28,6 +28,7 @@ class GameMap:
         self.game.constants.map_height = 50
         self.game.constants.map_width = 20
         self.game.constants.mapa_atual += 1
+        self.game.constants.max_level = max(self.game.constants.max_level, self.game.constants.mapa_atual)
         if self.game.constants.mapa_atual == 3:
             self.game_map = mapa_final
         else:

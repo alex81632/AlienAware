@@ -25,7 +25,7 @@ class Menu:
                     self.selected %= self.num_options
                 if event.key == pg.K_RETURN:
                     if self.selected == 0:
-                        self.constants.state = 1
+                        self.constants.state = 6
                         self.selected = 0
                     elif self.selected == 1:
                         self.constants.state = 3

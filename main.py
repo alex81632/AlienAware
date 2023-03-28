@@ -6,6 +6,7 @@ from pause import Pause
 from play import Play
 from settings import Settings
 from mapTransitions import mapTransitions
+from saveState import saveState
 
 class Game:
     def __init__(self):
@@ -19,9 +20,10 @@ class Game:
         self.play = Play(self.screen, self.constants)
         self.settings = Settings(self.screen, self.constants)
         self.mapTransitions = mapTransitions(self.screen, self.constants)
+        self.saveState = saveState(self.screen, self.constants)
         self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
         
-        # 0 = menu, 1 = game, 2 = pause, 3 = settings, 4 = mapTransitions, 5 = habilityTree
+        # 0 = menu, 1 = game, 2 = pause, 3 = settings, 4 = mapTransitions, 5 = habilityTree, 6 = saves
 
     def display_fps(self):
         # display fps at the top of the screen
@@ -56,6 +58,10 @@ class Game:
                 self.play.habilityTree.check_events()
                 self.play.habilityTree.update()
                 self.play.habilityTree.draw()
+            elif self.constants.state == 6:
+                self.saveState.check_events()
+                self.saveState.update()
+                self.saveState.draw()
             self.display_fps()
             pg.display.flip()
         pg.quit()

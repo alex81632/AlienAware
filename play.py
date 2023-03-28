@@ -17,6 +17,7 @@ class Play:
     def __init__(self, screen, constants):
         self.screen = screen
         self.constants = constants
+        self.constants.load_game()
         self.HUD = HUD(self.screen, self.constants)
         self.player = Player(self)
         self.gameMap = GameMap(self)
@@ -33,6 +34,7 @@ class Play:
         self.pathfinding = PathFinding(self)
         self.overlay = pg.image.load('assets/overlays/gameOverlay.png').convert_alpha()
         self.overlay = pg.transform.scale(self.overlay, (self.constants.width, self.constants.height))
+        self.time_start = time.time()
 
     def check_events(self):
         self.global_trigger = False
@@ -43,6 +45,9 @@ class Play:
                 self.constants.state = 2
                 # salva o objeto HabilityTree
                 self.habilityTree.save_game()
+                # adicona o numero de segundos jogados ao total
+                self.constants.time_played += time.time() - self.time_start
+                self.time_start = time.time()
                 # salva as constantes
                 self.constants.save_game()
             if event.type == pg.KEYDOWN and event.key == pg.K_h and self.constants.mapa_atual == 0:
@@ -61,6 +66,9 @@ class Play:
             self.player.single_fire_event(event)
 
     def update(self):
+        if self.constants.restart_tree == True:
+            self.habilityTree = HabilityTree(self.screen, self.constants)
+            self.constants.restart_tree = False
         self.player.update()
         self.raycasting.update()
         self.object_handler.update()

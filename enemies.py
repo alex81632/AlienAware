@@ -90,6 +90,7 @@ class Inimigo(AnimatedSprite):
                 self.alive = False
                 self.game.sound.enemy_death.play()
                 self.game.constants.player_coins += self.resourse * self.game.constants.coins_factor
+                self.game.constants.enemies_killed += 1
 
     def run_logic(self):
         if self.alive:
