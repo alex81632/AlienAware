@@ -25,7 +25,7 @@ class Player:
         sen_a = math.sin(self.angle)
         cos_a = math.cos(self.angle)
         dx, dy = 0,0
-        velocidade = self.game.constants.player_speed * self.game.constants.dt
+        velocidade = self.game.constants.player_speed * self.game.constants.dt * self.game.constants.speed_factor
         velocidade_seno = velocidade * sen_a
         velocidade_cosseno = velocidade * cos_a
 

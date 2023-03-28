@@ -98,7 +98,7 @@ class GameMap:
         map_[width-1][height//2] = 0
         map_ = np.append(map_, np.ones((1, height)), axis=0)
 
-        self.print_map(map_, visited)
+        #self.print_map(map_, visited)
 
         return map_
 

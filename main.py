@@ -7,6 +7,7 @@ from play import Play
 from settings import Settings
 from mapTransitions import mapTransitions
 from habilityTree import HabilityTree
+from pickle import load, dump
 
 
 class Game:
@@ -60,6 +61,10 @@ class Game:
                 self.habilityTree.draw()
             self.display_fps()
             pg.display.flip()
+        # salva o objeto HabilityTree
+        self.habilityTree.save_game()
+        # salva as constantes
+        self.constants.save_game()
         pg.quit()
 
 

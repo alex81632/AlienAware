@@ -42,12 +42,12 @@ class Constants:
         # player
         self.player_initial_position = self.map_width/2, 1.5
         self.player_initial_angle = math.pi/2
-        self.player_speed = 0.004
+        self.player_speed = 0.002
         self.player_rotation_speed = 0.002
         self.player_fov_scale = 60
         self.player_fov = self.player_fov_scale*math.pi/180
         self.player_fov_half = self.player_fov/2
-        self.player_scale = 200*self.pixel
+        self.player_scale = 100*self.pixel
         self.player_health = 100
         self.player_max_health = 100
         self.player_coins = 0
@@ -76,7 +76,68 @@ class Constants:
 
         # control flow
         self.return_to_menu = False
+
+        # hability tree constants
+        # se existir um arquivo save.txt, carrega os valores salvos
+        self.coins_factor = 1
+        self.precision_factor = 1
+        self.time_factor = 1
+        self.damage_factor = 1
+        self.ammo_factor = 1
+        self.furtivity_factor = 1
+        self.short_range_factor = 1
+        self.long_range_factor = 1
+        self.health_factor = 1
+        self.flasks_factor = 0
+        self.flask_room = 0 
+        self.speed_factor = 1
+        try:
+            with open('save.txt', 'r') as file:
+                self.coins_factor = float(file.readline())
+                self.precision_factor = float(file.readline())
+                self.time_factor = float(file.readline())
+                self.damage_factor = float(file.readline())
+                self.ammo_factor = float(file.readline())
+                self.furtivity_factor = float(file.readline())
+                self.short_range_factor = float(file.readline())
+                self.long_range_factor = float(file.readline())
+                self.health_factor = float(file.readline())
+                self.flasks_factor = float(file.readline())
+                self.flask_room = float(file.readline())
+                self.speed_factor = float(file.readline())
+                self.player_coins = float(file.readline())
+        # se não existir, cria um arquivo save.txt com os valores padrão
+        except:
+            with open('save.txt', 'w') as file:
+                file.write('1\n')
+                file.write('1\n')
+                file.write('1\n')
+                file.write('1\n')
+                file.write('1\n')
+                file.write('1\n')
+                file.write('1\n')
+                file.write('1\n')
+                file.write('1\n')
+                file.write('0\n')
+                file.write('0\n')
+                file.write('1\n')
+                file.write('0\n')
         
+    def save_game(self):
+        with open('save.txt', 'w') as file:
+            file.write(str(self.coins_factor) + '\n')
+            file.write(str(self.precision_factor) + '\n')
+            file.write(str(self.time_factor) + '\n')
+            file.write(str(self.damage_factor) + '\n')
+            file.write(str(self.ammo_factor) + '\n')
+            file.write(str(self.furtivity_factor) + '\n')
+            file.write(str(self.short_range_factor) + '\n')
+            file.write(str(self.long_range_factor) + '\n')
+            file.write(str(self.health_factor) + '\n')
+            file.write(str(self.flasks_factor) + '\n')
+            file.write(str(self.flask_room) + '\n')
+            file.write(str(self.speed_factor) + '\n')
+            file.write(str(self.player_coins) + '\n')
 
     def redefine_fov(self, fov):
         self.player_fov_scale = fov

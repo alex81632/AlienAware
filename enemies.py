@@ -26,6 +26,7 @@ class Inimigo(AnimatedSprite):
         self.frame_counter = 0
         self.player_search_trigger = False
         self.resourse = 100
+        self.type = 'dist'
 
     def update(self):
         self.check_animation_time()
@@ -57,7 +58,10 @@ class Inimigo(AnimatedSprite):
         if self.animation_trigger:
             self.game.sound.enemy_shot.play()
             if random() < self.accuracy:
-                self.game.player.get_damage(self.attack_damage)
+                if self.type == 'dist':
+                    self.game.player.get_damage(self.attack_damage//self.game.constants.long_range_factor)
+                else:
+                    self.game.player.get_damage(self.attack_damage//self.game.constants.short_range_factor)
 
     def animate_death(self):
         if not self.alive:
@@ -77,7 +81,7 @@ class Inimigo(AnimatedSprite):
                 self.game.sound.enemy_pain.play()
                 self.game.player.fire = False
                 self.pain = True
-                self.health -= self.game.weapon.damage
+                self.health -= self.game.weapon.damage * self.game.constants.damage_factor
                 self.check_health()
 
     def check_health(self):
@@ -85,7 +89,7 @@ class Inimigo(AnimatedSprite):
             if self.health < 1:
                 self.alive = False
                 self.game.sound.enemy_death.play()
-                self.game.constants.player_coins += self.resourse
+                self.game.constants.player_coins += self.resourse * self.game.constants.coins_factor
 
     def run_logic(self):
         if self.alive:
@@ -203,7 +207,8 @@ class CacoDemonNPC(Inimigo):
         self.attack_damage = 25
         self.speed = 0.05
         self.accuracy = 0.35
-        self.resourse = 100
+        self.resourse = 150
+        self.type = 'close'
 
 # class CyberDemonNPC(Inimigo):
 #     def __init__(self, game, path='resources/sprites/npc/cyber_demon/0.png', pos=(11.5, 6.0),
