@@ -6,9 +6,6 @@ from pause import Pause
 from play import Play
 from settings import Settings
 from mapTransitions import mapTransitions
-from habilityTree import HabilityTree
-from pickle import load, dump
-
 
 class Game:
     def __init__(self):
@@ -23,7 +20,7 @@ class Game:
         self.settings = Settings(self.screen, self.constants)
         self.mapTransitions = mapTransitions(self.screen, self.constants)
         self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
-        self.habilityTree = HabilityTree(self.screen, self.constants)
+        
         # 0 = menu, 1 = game, 2 = pause, 3 = settings, 4 = mapTransitions, 5 = habilityTree
 
     def display_fps(self):
@@ -56,15 +53,11 @@ class Game:
             elif self.constants.state == 4:
                 self.mapTransitions.draw()
             elif self.constants.state == 5:
-                self.habilityTree.check_events()
-                self.habilityTree.update()
-                self.habilityTree.draw()
+                self.play.habilityTree.check_events()
+                self.play.habilityTree.update()
+                self.play.habilityTree.draw()
             self.display_fps()
             pg.display.flip()
-        # salva o objeto HabilityTree
-        self.habilityTree.save_game()
-        # salva as constantes
-        self.constants.save_game()
         pg.quit()
 
 

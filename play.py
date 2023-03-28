@@ -11,6 +11,7 @@ from weapon import Weapon
 from sound import Sound
 from pathFinding import PathFinding
 from enemies import *
+from habilityTree import HabilityTree
 
 class Play:
     def __init__(self, screen, constants):
@@ -25,6 +26,7 @@ class Play:
         self.object_handler = ObjectHandler(self)
         self.weapon = Weapon(self)
         self.sound = Sound(self)
+        self.habilityTree = HabilityTree(self.screen, self.constants)
         self.global_trigger = False
         self.global_event = pg.USEREVENT + 0
         pg.time.set_timer(self.global_event, 40)
@@ -39,6 +41,10 @@ class Play:
                 self.constants.running = False
             if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 self.constants.state = 2
+                # salva o objeto HabilityTree
+                self.habilityTree.save_game()
+                # salva as constantes
+                self.constants.save_game()
             if event.type == pg.KEYDOWN and event.key == pg.K_h and self.constants.mapa_atual == 0:
                 self.constants.state = 5
             if event.type == pg.KEYDOWN and event.key == pg.K_m:
