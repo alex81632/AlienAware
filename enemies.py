@@ -44,15 +44,26 @@ class Inimigo(AnimatedSprite):
             self.y += dy
 
     def movement(self):
-        next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_position)
-        next_x, next_y = next_pos
 
-        # pg.draw.rect(self.game.screen, 'blue', (100 * next_x, 100 * next_y, 100, 100))
-        if next_pos not in self.game.object_handler.enemy_positions:
+        if self.ray_cast_player_enemy():
+
+            next_pos = self.game.player.map_position
+            next_x, next_y = next_pos
             angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
             dx = math.cos(angle) * self.speed
             dy = math.sin(angle) * self.speed
             self.check_wall_collision(dx, dy)
+        else:
+
+            next_pos = self.game.pathfinding.get_path(self.map_pos, self.game.player.map_position)
+            next_x, next_y = next_pos
+
+            # pg.draw.rect(self.game.screen, 'blue', (100 * next_x, 100 * next_y, 100, 100))
+            if next_pos not in self.game.object_handler.enemy_positions:
+                angle = math.atan2(next_y + 0.5 - self.y, next_x + 0.5 - self.x)
+                dx = math.cos(angle) * self.speed
+                dy = math.sin(angle) * self.speed
+                self.check_wall_collision(dx, dy)
 
     def attack(self):
         if self.animation_trigger:

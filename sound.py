@@ -10,4 +10,5 @@ class Sound:
         self.enemy_death = pg.mixer.Sound(self.path + 'npc_death.wav')
         self.enemy_shot = pg.mixer.Sound(self.path + 'npc_attack.wav')
         self.player_pain = pg.mixer.Sound(self.path + 'player_pain.wav')
+        self.potion_heal = pg.mixer.Sound(self.path + 'potion_heal.mp3')
         # self.enemy_pain = pg.mixer.Sound(self.path + 'shotgun.wav') # Coloque a música tema do jogo aqui

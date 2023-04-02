@@ -1,18 +1,21 @@
 from random import choices, randrange
 from spriteObject import AnimatedSprite, SpriteObject
 from enemies import *
+from potion import Potion
 
 class ObjectHandler:
     def __init__(self, game):
         self.game = game
         self.sprite_list = []
         self.enemies_list = []
+        self.potion_list = []
         self.enemies_sprite_path = 'Recursos/Inimigos/'
         self.static_sprite_path = 'Recursos/static_sprites/'
         self.anim_sprite_path = 'Recursos/animated_sprites/'
         add_sprite = self.add_sprite
         add_enemy = self.add_enemy
         self.enemies_positions = {}
+        self.potions_positions = {}
 
         # spawn npc
         # self.enemies = 20  # npc count
@@ -67,10 +70,18 @@ class ObjectHandler:
         for i in range(number):
             enemy = choices(self.enemy_types, self.weights)[0]
             x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
-            while (x, y) not in self.game.gameMap.map_inversed:
+            while ((x, y) not in self.game.gameMap.map_inversed) or (x < 10):
+                x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
+            print((self.game.constants.map_height,self.game.constants.map_width))
+            self.add_enemy(enemy(self.game, pos=(x + 0.5, y + 0.5)))
+    
+    def spawn_potions(self, number):
+        for i in range(number):
+            x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
+            while ((x, y) not in self.game.gameMap.map_inversed) and (x < 10):
                 x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
 
-            self.add_enemy(enemy(self.game, pos=(x + 0.5, y + 0.5)))
+            self.add_potion(Potion(self.game, path = 'Recursos\static_sprites\potion.png', pos=(x + 0.5, y + 0.5), scale=0.5, shift=0.8))
 
             
     # def check_win(self):
@@ -83,14 +94,27 @@ class ObjectHandler:
     def update(self):
         self.enemy_positions = {enemy.map_pos for enemy in self.enemies_list if enemy.alive}
         [sprite.update() for sprite in self.sprite_list]
+        [potion.update() for potion in self.potion_list]
         [enemy.update() for enemy in self.enemies_list]
         # self.check_win()
     
     def remove_enemies(self):
         self.enemies_list = []
 
+    def remove_potion(self, x, y):
+        for i in range(len(self.potion_list)):
+            if self.potion_list[i].x == x and self.potion_list[i].y == y:
+                remove = i
+        self.potion_list.pop(remove)
+
+    def remove_all_potions(self):
+        self.potion_list = []
+
     def add_enemy(self, enemy):
         self.enemies_list.append(enemy)
 
     def add_sprite(self, sprite):
         self.sprite_list.append(sprite)
+
+    def add_potion(self, potion):
+        self.potion_list.append(potion)

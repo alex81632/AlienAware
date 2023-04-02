@@ -5,7 +5,7 @@ class PathFinding:
     def __init__(self, game):
         self.game = game
         self.map = game.gameMap.game_map
-        self.ways = [-1, 0], [0, -1], [1, 0], [0, 1], [-1, -1], [1, -1], [1, 1], [-1, 1]
+        self.ways = [-1, 0], [0, -1], [1, 0], [0, 1] # , [-1, -1], [1, -1], [1, 1], [-1, 1]
         self.graph = {}
         self.get_graph()
 
