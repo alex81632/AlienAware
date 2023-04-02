@@ -1,4 +1,4 @@
-from random import choices, randrange
+from random import choices, randrange, choice
 from spriteObject import AnimatedSprite, SpriteObject
 from enemies import *
 from potion import Potion
@@ -69,17 +69,14 @@ class ObjectHandler:
     def spawn_enemies(self, number):
         for i in range(number):
             enemy = choices(self.enemy_types, self.weights)[0]
-            x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
-            while ((x, y) not in self.game.gameMap.map_inversed) or (x < 10):
-                x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
-            print((self.game.constants.map_height,self.game.constants.map_width))
+            x, y = choice(list(self.game.gameMap.map_inversed.keys()))
+            while y<10:
+                x, y = choice(list(self.game.gameMap.map_inversed.keys()))
             self.add_enemy(enemy(self.game, pos=(x + 0.5, y + 0.5)))
     
     def spawn_potions(self, number):
         for i in range(number):
-            x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
-            while ((x, y) not in self.game.gameMap.map_inversed) and (x < 10):
-                x, y = randrange(self.game.constants.map_height), randrange(self.game.constants.map_width)
+            x, y = choice(list(self.game.gameMap.map_inversed.keys()))
 
             self.add_potion(Potion(self.game, path = 'Recursos\static_sprites\potion.png', pos=(x + 0.5, y + 0.5), scale=0.5, shift=0.8))
 

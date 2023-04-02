@@ -67,7 +67,10 @@ class Inimigo(AnimatedSprite):
 
     def attack(self):
         if self.animation_trigger:
-            self.game.sound.enemy_shot.play()
+            if self.type == 'dist':
+                self.game.sound.enemy_shot.play()
+            else:
+                self.game.sound.enemy_attack.play()
             if random() < self.accuracy:
                 if self.type == 'dist':
                     self.game.player.get_damage(self.attack_damage//self.game.constants.long_range_factor)

@@ -25,8 +25,8 @@ class ObjectRender:
         pg.draw.rect(self.screen, self.game.constants.floor_color, (0, self.game.constants.half_height, self.game.constants.width, self.game.constants.height))
 
     def objects_for_render(self):
-        obj_list = sorted(self.game.raycasting.obj_to_render, key=lambda t: t[0], reverse=True)
-        # obj_list = self.game.raycasting.obj_to_render
+        # obj_list = sorted(self.game.raycasting.obj_to_render, key=lambda t: t[0], reverse=True)
+        obj_list = self.game.raycasting.obj_to_render
         for depth, image, position in obj_list:
             # para objetos mais distantes, diminuir o brightness
             brightness = 220 - (255 * depth*1.5 / self.game.constants.max_depth)

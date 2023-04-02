@@ -85,8 +85,12 @@ class Play:
             self.object_handler.remove_all_potions()
             self.pathfinding = PathFinding(self)
             print(self.gameMap.game_map)
-            self.object_handler.spawn_enemies(10)
-            self.object_handler.spawn_potions(15 + int(self.constants.flasks_factor))
+            if self.constants.mapa_atual == 1:
+                self.object_handler.spawn_enemies(20)
+                self.object_handler.spawn_potions(10 + int(self.constants.flasks_factor))
+            elif self.constants.mapa_atual == 2:
+                self.object_handler.spawn_enemies(30)
+                self.object_handler.spawn_potions(10 + int(self.constants.flasks_factor))
             # atualiza o jogador para a nova posição
             self.player.x, self.player.y = self.constants.player_initial_position
             self.player.angle = self.constants.player_initial_angle
