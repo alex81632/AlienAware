@@ -375,7 +375,7 @@ class HabilityTree:
 
     def draw_tree(self):
         space = (self.constants.width - 2*self.constants.padding)/11
-        x = self.padding*2
+        x = self.padding
         y = self.padding*8
         for i in range(len(self.classes)):
             xa = x + ((self.classes[i].hor_space-1)/2)*space
@@ -383,7 +383,7 @@ class HabilityTree:
             self.classes[i].x = xa
             self.classes[i].y = y
             x += self.classes[i].hor_space*space
-        x = self.padding*2
+        x = self.padding
         y += self.size*2
         for i in range(len(self.subClasses)):
             xa = x + ((self.subClasses[i].hor_space-1)/2)*space
@@ -391,13 +391,13 @@ class HabilityTree:
             self.subClasses[i].x = xa
             self.subClasses[i].y = y
             x += self.subClasses[i].hor_space*space
-        x = self.padding*2
+        x = self.padding
         y += self.size*2
         x_max = x + (self.habilities_per_row-1)*space
         for i in range(len(self.habilities)):
             xa = x + ((self.habilities[i].hor_space-1)/2)*space
             if xa > x_max:
-                x = self.padding*2
+                x = self.padding
                 y += self.size*2
                 xa = x + ((self.habilities[i].hor_space-1)/2)*space
             self.habilities[i].draw(self.screen, xa, y)
