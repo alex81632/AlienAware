@@ -1,5 +1,6 @@
 import pygame as pg
 import math
+import time
 
 class Player:
     def __init__(self, game):
@@ -8,6 +9,7 @@ class Player:
         self.angle = self.game.constants.player_initial_angle
         self.rel = 0
         self.fire = False
+        self.time = time.time()
 
     def get_damage(self, damage):
         self.game.constants.player_health -= damage
@@ -16,10 +18,17 @@ class Player:
     
     def single_fire_event(self, event):
         if event.type == pg.MOUSEBUTTONDOWN:
-            if event.button == 1 and not self.fire and not self.game.weapon.reloading:
+            if event.button == 1 and not self.fire and not self.game.weapon.reloading and self.game.constants.player_ammo > 0:
                 self.game.sound.shotgun.play()
                 self.fire = True
                 self.game.weapon.reloading = True
+                self.game.constants.player_ammo -= 1
+                if self.game.constants.player_ammo == 0:
+                    self.time = time.time()
+    
+    def reload(self):
+        if self.game.constants.player_ammo == 0 and time.time() - self.time > 3 - self.game.constants.time_factor:
+            self.game.constants.player_ammo = self.game.constants.player_max_ammo*self.game.constants.ammo_factor
 
     def moviment(self):
         sen_a = math.sin(self.angle)

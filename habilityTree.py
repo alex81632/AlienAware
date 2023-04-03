@@ -226,11 +226,11 @@ class HabilityTree:
         if idb == 0:
             self.constants.coins_factor += 0.1
         elif idb == 1:
-            self.constants.precision_factor += 0.1
+            self.constants.time_factor += 0.3
         elif idb == 2:
             self.constants.damage_factor += 0.1
         elif idb == 3:
-            self.constants.ammo_factor += 0.1
+            self.constants.ammo_factor += 0.2
         elif idb == 4:
             self.constants.furtivity_factor += 0.1
         elif idb == 5:

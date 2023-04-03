@@ -70,6 +70,7 @@ class Play:
             
             # Evento do tiro da arma
             self.player.single_fire_event(event)
+            self.player.reload()
 
     def update(self):
         if self.constants.restart_tree == True:

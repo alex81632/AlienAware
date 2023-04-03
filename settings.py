@@ -71,9 +71,13 @@ class Settings:
             if self.sound_volume > 0:
                 self.sound_volume = 0
                 self.sound_volume_state = "Desligado"
+                # desligar o som
+                pg.mixer.music.set_volume(0)
             else:
                 self.sound_volume = 1
                 self.sound_volume_state = "Ligado"
+                # ligar o som
+                pg.mixer.music.set_volume(1)
         elif self.selected == 1:
             # mudar fov
             self.fov_index += 1
