@@ -23,12 +23,12 @@ class Player:
                 self.fire = True
                 self.game.weapon.reloading = True
                 self.game.constants.player_ammo -= 1
-                if self.game.constants.player_ammo == 0:
+                if self.game.constants.player_ammo <= 0:
                     self.time = time.time()
     
     def reload(self):
-        if self.game.constants.player_ammo == 0 and time.time() - self.time > 3 - self.game.constants.time_factor:
-            self.game.constants.player_ammo = self.game.constants.player_max_ammo*self.game.constants.ammo_factor
+        if self.game.constants.player_ammo <= 0 and time.time() - self.time > 4 - self.game.constants.time_factor:
+            self.game.constants.player_ammo = self.game.constants.player_max_ammo + self.game.constants.ammo_factor
 
     def moviment(self):
         sen_a = math.sin(self.angle)

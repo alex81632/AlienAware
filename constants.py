@@ -55,7 +55,7 @@ class Constants:
         self.player_max_health = 100
         self.player_coins = 0
         self.player_ammo = 5
-        self.player_max_ammo = 5
+        self.player_max_ammo = 4
 
         # raycasting
         self.total_rays = self.width//2

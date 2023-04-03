@@ -30,7 +30,7 @@ class HUD:
         text = self.font.render("Recursos: " + str(int(self.constants.player_coins)), 1, (200,200,200))
         self.screen.blit(text, (self.scale + self.constants.padding*2, self.constants.padding*2.5 - text.get_height() - self.constants.padding//4))
         # desenhar a munição
-        text = self.font_l.render("Munição: " + str(int(self.constants.player_ammo)) + "/" + str(int(self.constants.player_max_ammo*self.constants.ammo_factor)), 1, (200,200,200))
+        text = self.font_l.render("Munição: " + str(int(self.constants.player_ammo)) + "/" + str(int(self.constants.player_max_ammo+self.constants.ammo_factor)), 1, (200,200,200))
         # desenhar no canto direto inferior
         self.screen.blit(text, (self.constants.width - text.get_width() - self.constants.padding, self.constants.height - text.get_height() - self.constants.padding))
         
