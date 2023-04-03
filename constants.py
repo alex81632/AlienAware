@@ -18,10 +18,13 @@ class Constants:
         self.padding = 40*self.pixel
         self.random = np.random.RandomState(0)
         self.dt = 1
+        self.invencible = False
+        self.invisibilidade = False
+        self.transp_factor = 1.5
 
         # map
-        self.map_width = 11
-        self.map_height = 10
+        self.map_width = 7
+        self.map_height = 8
         self.textures_size = 256
         self.half_textures_size = self.textures_size//2
         self.floor_color = (30, 30, 30)
@@ -181,6 +184,7 @@ class Constants:
         self.wall_distance = self.half_height/math.tan(self.player_fov_half)
     
     def resize_minimap(self, state):
+        print(self.minimap_scale)
         # se estado for 0, redimensiona o minimapa para o tamanho original
         if state == 0:
             self.minimap_size = 200*self.pixel

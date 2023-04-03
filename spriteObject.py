@@ -85,5 +85,15 @@ class AnimatedSprite(SpriteObject):
         for file_name in os.listdir(path):
             if os.path.isfile(os.path.join(path, file_name)):
                 img = pg.image.load(path + '/' + file_name).convert_alpha()
+                # redimensionar para aspec ratio de 16:9
+                w = img.get_width()
+                h = img.get_height()
+                if w / h > 16 / 9:
+                    w2 = 16 / 9 * h
+                    img = pg.transform.scale(img, (w2, h))
+                else:
+                    h2 = 9 / 16 * w
+                    img = pg.transform.scale(img, (w, h2))
+
                 images.append(img)
         return images

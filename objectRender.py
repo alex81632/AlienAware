@@ -1,4 +1,5 @@
 import pygame as pg
+from random import randint
 
 class ObjectRender:
 
@@ -25,13 +26,17 @@ class ObjectRender:
         pg.draw.rect(self.screen, self.game.constants.floor_color, (0, self.game.constants.half_height, self.game.constants.width, self.game.constants.height))
 
     def objects_for_render(self):
-        # obj_list = sorted(self.game.raycasting.obj_to_render, key=lambda t: t[0], reverse=True)
-        obj_list = self.game.raycasting.obj_to_render
+        if self.game.constants.invisibilidade:
+            obj_list = self.game.raycasting.obj_to_render
+        else:
+            obj_list = sorted(self.game.raycasting.obj_to_render, key=lambda t: t[0], reverse=True)
         for depth, image, position in obj_list:
             # para objetos mais distantes, diminuir o brightness
-            brightness = 220 - (255 * depth*1.5 / self.game.constants.max_depth)
+            brightness = 220 - (255 * depth*self.game.constants.transp_factor / self.game.constants.max_depth)
             if brightness < 0:
                 brightness = 0
+            if brightness > 255:
+                brightness = 255
             image.fill((brightness, brightness, brightness), special_flags=pg.BLEND_RGB_MULT)
 
             self.screen.blit(image, position)
@@ -42,4 +47,6 @@ class ObjectRender:
         return pg.transform.scale(texture, res)
 
     def load_textures(self):
-        return{1: self.get_textures('Recursos\Texturas\pxp10.png')}
+        esc = randint(1, 10)
+        path = f'Recursos\Texturas\pxp{esc}.png'
+        return{1: self.get_textures(path)}

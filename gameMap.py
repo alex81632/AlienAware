@@ -5,7 +5,7 @@ import numpy as np
 _ = 0
 
 # sala inicial 10x10 com paredes em volta
-mapa_inicial = [[1,1,1,1,1,1,1,1,1,1,1]] + [[1,_,_,_,_,_,_,_,_,_,1] for i in range(9)] + [[1,1,1,1,1,_,1,1,1,1,1]]
+mapa_inicial = [[1,1,1,1,1,1,1]] + [[1,_,_,_,_,_,1] for i in range(6)] + [[1,1,1,_,1,1,1]]
 
 # sala final 20x20 com paredes em volta
 mapa_final = [[1]*21] + [[1]+[0]*19+[1] for i in range(19)] + [[1]*21]
@@ -26,7 +26,7 @@ class GameMap:
     
     def next_map(self):
         self.game.constants.map_height = 50
-        self.game.constants.map_width = 20
+        self.game.constants.map_width = 21
         self.game.constants.mapa_atual += 1
         self.game.constants.max_level = max(self.game.constants.max_level, self.game.constants.mapa_atual)
         if self.game.constants.mapa_atual == 3:

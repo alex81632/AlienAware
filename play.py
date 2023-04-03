@@ -55,8 +55,14 @@ class Play:
             if event.type == pg.KEYDOWN and event.key == pg.K_m:
                 self.constants.minimap_state = not self.constants.minimap_state
                 self.constants.resize_minimap(self.constants.minimap_state)
-            if event.type == pg.KEYDOWN and event.key == pg.K_h:
-                self.constants.player_health -= 1
+            if event.type == pg.KEYDOWN and event.key == pg.K_i:
+                self.constants.invencible = not self.constants.invencible
+            if event.type == pg.KEYDOWN and event.key == pg.K_p:
+                self.constants.invisibilidade = not self.constants.invisibilidade
+            if event.type == pg.KEYDOWN and event.key == pg.K_UP:
+                self.constants.transp_factor += 0.1
+            if event.type == pg.KEYDOWN and event.key == pg.K_DOWN:
+                self.constants.transp_factor -= 0.1
             
             # Transição de animação dos inimigos
             if event.type == self.global_event:
@@ -84,7 +90,6 @@ class Play:
             self.object_handler.remove_enemies()
             self.object_handler.remove_all_potions()
             self.pathfinding = PathFinding(self)
-            print(self.gameMap.game_map)
             if self.constants.mapa_atual == 1:
                 self.object_handler.spawn_enemies(20)
                 self.object_handler.spawn_potions(10 + int(self.constants.flasks_factor))
@@ -97,6 +102,8 @@ class Play:
 
             # atualiza o minimapa para a nova posição
             self.miniMap = MiniMap(self)
+            self.object_handler.remove_all_sprites()
+            self.object_handler.spawn_portal()
 
         # se a vida for menor que 0, volta pro mapa inicial
         if self.constants.player_health <= 0 or self.constants.return_to_menu == True:
@@ -116,6 +123,8 @@ class Play:
 
             # atualiza o minimapa para a nova posição
             self.miniMap = MiniMap(self)
+            self.object_handler.remove_all_sprites()
+            self.object_handler.spawn_portal()
 
         
     def draw(self):
