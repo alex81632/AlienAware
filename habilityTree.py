@@ -393,7 +393,7 @@ class HabilityTree:
             x += self.subClasses[i].hor_space*space
         x = self.padding
         y += self.size*2
-        x_max = x + (self.habilities_per_row-1)*space
+        x_max = x + (self.habilities_per_row-1)*space + 10
         for i in range(len(self.habilities)):
             xa = x + ((self.habilities[i].hor_space-1)/2)*space
             if xa > x_max:
