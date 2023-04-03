@@ -29,8 +29,9 @@ class GameMap:
         self.game.constants.map_width = 21
         self.game.constants.mapa_atual += 1
         self.game.constants.max_level = max(self.game.constants.max_level, self.game.constants.mapa_atual)
-        if self.game.constants.mapa_atual == 3:
+        if self.game.constants.mapa_atual == 3 and self.game.constants.finished == False:
             self.game_map = mapa_final
+            # self.game.constants.finished = 1
         else:
             self.game_map = self.generate_map(self.game.constants.map_height, self.game.constants.map_width)
         self.game.constants.player_initial_position = self.game.constants.map_width/2, 1.5

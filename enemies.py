@@ -71,7 +71,7 @@ class Inimigo(AnimatedSprite):
                 self.game.sound.enemy_shot.play()
             else:
                 self.game.sound.enemy_attack.play()
-            if random() < self.accuracy:
+            if random() < self.accuracy and not self.game.constants.invencible:
                 if self.type == 'dist':
                     self.game.player.get_damage(self.attack_damage//self.game.constants.long_range_factor)
                 else:
@@ -105,6 +105,8 @@ class Inimigo(AnimatedSprite):
                 self.game.sound.enemy_death.play()
                 self.game.constants.player_coins += self.resourse * self.game.constants.coins_factor
                 self.game.constants.enemies_killed += 1
+                self.game.waveController.wave_enemies_killed += 1
+                self.game.waveController.wave_enemies_alive -= 1
 
     def run_logic(self):
         if self.alive:

@@ -18,9 +18,10 @@ class ObjectHandler:
         self.weights = [70, 30]
 
         self.spawn_portal()
+        self.spaw_initial_objects()
         
-        # add_sprite(AnimatedSprite(game, path=self.anim_sprite_path + 'red_light/0.png', pos=(3.5, 7.5)))
-        # add_sprite(AnimatedSprite(game, pos=(14.5, 24.5)))
+        
+        # self.add_sprite(AnimatedSprite(game, pos=(2.5, 6.8)))
 
         # npc map
         
@@ -29,6 +30,9 @@ class ObjectHandler:
         # add_npc(CyberDemonNPC(game, pos=(14.5, 25.5)))
 
 
+    def spaw_initial_objects(self):
+        self.add_sprite(AnimatedSprite(self.game, path=self.anim_sprite_path + 'computer/comp_0.png', pos=(2.5, 6.8)))
+        self.add_sprite(AnimatedSprite(self.game, path=self.anim_sprite_path + 'vendingMachine/vm_0.png', pos=(4.5, 6.8)))
 
     def spawn_portal(self):
         h = self.game.constants.map_height

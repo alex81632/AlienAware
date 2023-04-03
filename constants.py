@@ -81,10 +81,11 @@ class Constants:
 
         # control flow
         self.return_to_menu = False
-        self.finished = False
+        self.finished = 0
         self.max_level = 0
         self.enemies_killed = 0
         self.time_played = 0
+        self.outro = 0
 
         # hability tree constants
         self.restart_tree = False
@@ -121,8 +122,10 @@ class Constants:
                 self.max_level = float(file.readline())
                 self.enemies_killed = float(file.readline())
                 self.time_played = float(file.readline())
+                self.finished = float(file.readline())
         # se não existir, cria um arquivo save.txt com os valores padrão
         except:
+            print('save.txt não encontrado')
             with open('save.txt', 'w') as file:
                 file.write('1\n')
                 file.write('1\n')
@@ -136,6 +139,7 @@ class Constants:
                 file.write('0\n')
                 file.write('0\n')
                 file.write('1\n')
+                file.write('0\n')
                 file.write('0\n')
                 file.write('0\n')
                 file.write('0\n')
@@ -157,6 +161,7 @@ class Constants:
                 self.max_level = float(file.readline())
                 self.enemies_killed = float(file.readline())
                 self.time_played = float(file.readline())
+                self.finished = float(file.readline())
         
     def save_game(self):
         with open('save.txt', 'w') as file:
@@ -176,6 +181,7 @@ class Constants:
             file.write(str(self.max_level) + '\n')
             file.write(str(self.enemies_killed) + '\n')
             file.write(str(self.time_played) + '\n')
+            file.write(str(self.finished) + '\n')
             
 
     def redefine_fov(self, fov):
@@ -186,7 +192,6 @@ class Constants:
         self.wall_distance = self.half_height/math.tan(self.player_fov_half)
     
     def resize_minimap(self, state):
-        print(self.minimap_scale)
         # se estado for 0, redimensiona o minimapa para o tamanho original
         if state == 0:
             self.minimap_size = 200*self.pixel
