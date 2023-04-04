@@ -20,8 +20,8 @@ class HabilityTree:
         custo = 10
         # contruir arvore de habilidades
         #classes
-        self.classes.append(self.hability(0, "Constituição", "Liberar a árvore de constituição", custo, -1, self.size, 5))
-        self.classes.append(self.hability(1, "Técnico", "Liberar a árvore técnica", custo, -1, self.size, 6))
+        self.classes.append(self.hability(0, "Técnico", "Liberar a árvore técnica", custo, -1, self.size, 5))
+        self.classes.append(self.hability(1, "Vida", "Liberar a árvore de constituição", custo, -1, self.size, 6))
         # definir que as classes 0 e 1 tem status 1
         self.classes[0].status = 1
         self.classes[1].status = 1
@@ -29,8 +29,8 @@ class HabilityTree:
         self.subClasses.append(self.hability(2, "Ganância", "Libera a árvore de ganância", custo, 0, self.size, 1))
         self.subClasses.append(self.hability(3, "Armas", "Libera a árvore de armas", custo, 0, self.size, 3))
         self.subClasses.append(self.hability(4, "Lojinha", "Libera a árvore da lojinha", custo, 0, self.size, 1))
-        self.subClasses.append(self.hability(5, "Resistência", "Libera a árvore de resistência", custo, 1, self.size, 2))
-        self.subClasses.append(self.hability(6, "Saúde", "Libera a árvore de saúde", custo, 1, self.size, 3))
+        self.subClasses.append(self.hability(5, "Resistência física", "Libera a árvore de resistência", custo, 1, self.size, 2))
+        self.subClasses.append(self.hability(6, "Vida", "Libera a árvore de saúde", custo, 1, self.size, 3))
         self.subClasses.append(self.hability(7, "Velocidade", "Libera a árvore de velocidade", custo, 1, self.size, 1))
         # habilidades
         nome = ['Ganância', 'Tempo', 'Dano', 'Munição', 'Lojinha', 'Resistência física', 'Resistência bala', 'Vida' ,'Mais Cura' ,'Mais Achados' , 'Velocidade']
@@ -47,69 +47,69 @@ class HabilityTree:
                      'Aumenta em 10% a velocidade']
         k = " I"
         # linha 1
-        self.habilities.append(self.hability(8, nome[0] + k, descricao[0], custo, 2, self.size, 1))
-        self.habilities.append(self.hability(9, nome[1] + k, descricao[1], custo, 3, self.size, 1))
-        self.habilities.append(self.hability(10, nome[2] + k, descricao[2], custo, 3, self.size, 1))
-        self.habilities.append(self.hability(11, nome[3] + k, descricao[3], custo, 3, self.size, 1))
-        self.habilities.append(self.hability(12, nome[4] + k, descricao[4], custo, 4, self.size, 1))
-        self.habilities.append(self.hability(13, nome[5] + k, descricao[5], custo, 5, self.size, 1))
-        self.habilities.append(self.hability(14, nome[6] + k, descricao[6], custo, 5, self.size, 1))    
-        self.habilities.append(self.hability(15, nome[7] + k, descricao[7], custo, 6, self.size, 1))
-        self.habilities.append(self.hability(16, nome[8] + k, descricao[8], custo, 6, self.size, 1))
-        self.habilities.append(self.hability(17, nome[9] + k, descricao[9], custo, 6, self.size, 1))
-        self.habilities.append(self.hability(18, nome[10] + k, descricao[10], custo, 7, self.size, 1))
+        self.habilities.append(self.hability(8, nome[0], descricao[0], custo, 2, self.size, 1))
+        self.habilities.append(self.hability(9, nome[1], descricao[1], custo, 3, self.size, 1))
+        self.habilities.append(self.hability(10, nome[2], descricao[2], custo, 3, self.size, 1))
+        self.habilities.append(self.hability(11, nome[3], descricao[3], custo, 3, self.size, 1))
+        self.habilities.append(self.hability(12, nome[4], descricao[4], custo, 4, self.size, 1))
+        self.habilities.append(self.hability(13, nome[5], descricao[5], custo, 5, self.size, 1))
+        self.habilities.append(self.hability(14, nome[6], descricao[6], custo, 5, self.size, 1))    
+        self.habilities.append(self.hability(15, nome[7], descricao[7], custo, 6, self.size, 1))
+        self.habilities.append(self.hability(16, nome[8], descricao[8], custo, 6, self.size, 1))
+        self.habilities.append(self.hability(17, nome[9], descricao[9], custo, 6, self.size, 1))
+        self.habilities.append(self.hability(18, nome[10], descricao[10], custo, 7, self.size, 1))
         k = " II"
         # linha 2
-        self.habilities.append(self.hability(19, nome[0] + k, descricao[0], custo, 8, self.size, 1))
-        self.habilities.append(self.hability(20, nome[1] + k, descricao[1], custo, 9, self.size, 1))
-        self.habilities.append(self.hability(21, nome[2] + k, descricao[2], custo, 10, self.size, 1))
-        self.habilities.append(self.hability(22, nome[3] + k, descricao[3], custo, 11, self.size, 1))
-        self.habilities.append(self.hability(23, nome[4] + k, descricao[4], custo, 12, self.size, 1))
-        self.habilities.append(self.hability(24, nome[5] + k, descricao[5], custo, 13, self.size, 1))
-        self.habilities.append(self.hability(25, nome[6] + k, descricao[6], custo, 14, self.size, 1))
-        self.habilities.append(self.hability(26, nome[7] + k, descricao[7], custo, 15, self.size, 1))
-        self.habilities.append(self.hability(27, nome[8] + k, descricao[8], custo, 16, self.size, 1))
-        self.habilities.append(self.hability(28, nome[9] + k, descricao[9], custo, 17, self.size, 1))
-        self.habilities.append(self.hability(29, nome[10] + k, descricao[10], custo, 18, self.size, 1))
+        self.habilities.append(self.hability(19, nome[0], descricao[0], custo, 8, self.size, 1))
+        self.habilities.append(self.hability(20, nome[1], descricao[1], custo, 9, self.size, 1))
+        self.habilities.append(self.hability(21, nome[2], descricao[2], custo, 10, self.size, 1))
+        self.habilities.append(self.hability(22, nome[3], descricao[3], custo, 11, self.size, 1))
+        self.habilities.append(self.hability(23, nome[4], descricao[4], custo, 12, self.size, 1))
+        self.habilities.append(self.hability(24, nome[5], descricao[5], custo, 13, self.size, 1))
+        self.habilities.append(self.hability(25, nome[6], descricao[6], custo, 14, self.size, 1))
+        self.habilities.append(self.hability(26, nome[7], descricao[7], custo, 15, self.size, 1))
+        self.habilities.append(self.hability(27, nome[8], descricao[8], custo, 16, self.size, 1))
+        self.habilities.append(self.hability(28, nome[9], descricao[9], custo, 17, self.size, 1))
+        self.habilities.append(self.hability(29, nome[10], descricao[10], custo, 18, self.size, 1))
         k = " III"
         # linha 3
-        self.habilities.append(self.hability(30, nome[0] + k, descricao[0], custo, 19, self.size, 1))
-        self.habilities.append(self.hability(31, nome[1] + k, descricao[1], custo, 20, self.size, 1))
-        self.habilities.append(self.hability(32, nome[2] + k, descricao[2], custo, 21, self.size, 1))
-        self.habilities.append(self.hability(33, nome[3] + k, descricao[3], custo, 22, self.size, 1))
-        self.habilities.append(self.hability(34, nome[4] + k, descricao[4], custo, 23, self.size, 1))
-        self.habilities.append(self.hability(35, nome[5] + k, descricao[5], custo, 24, self.size, 1))
-        self.habilities.append(self.hability(36, nome[6] + k, descricao[6], custo, 25, self.size, 1))
-        self.habilities.append(self.hability(37, nome[7] + k, descricao[7], custo, 26, self.size, 1))
-        self.habilities.append(self.hability(38, nome[8] + k, descricao[8], custo, 27, self.size, 1))
-        self.habilities.append(self.hability(39, nome[9] + k, descricao[9], custo, 28, self.size, 1))
-        self.habilities.append(self.hability(40, nome[10] + k, descricao[10], custo, 29, self.size, 1))
+        self.habilities.append(self.hability(30, nome[0], descricao[0], custo, 19, self.size, 1))
+        self.habilities.append(self.hability(31, nome[1], descricao[1], custo, 20, self.size, 1))
+        self.habilities.append(self.hability(32, nome[2], descricao[2], custo, 21, self.size, 1))
+        self.habilities.append(self.hability(33, nome[3], descricao[3], custo, 22, self.size, 1))
+        self.habilities.append(self.hability(34, nome[4], descricao[4], custo, 23, self.size, 1))
+        self.habilities.append(self.hability(35, nome[5], descricao[5], custo, 24, self.size, 1))
+        self.habilities.append(self.hability(36, nome[6], descricao[6], custo, 25, self.size, 1))
+        self.habilities.append(self.hability(37, nome[7], descricao[7], custo, 26, self.size, 1))
+        self.habilities.append(self.hability(38, nome[8], descricao[8], custo, 27, self.size, 1))
+        self.habilities.append(self.hability(39, nome[9], descricao[9], custo, 28, self.size, 1))
+        self.habilities.append(self.hability(40, nome[10], descricao[10], custo, 29, self.size, 1))
         k = " IV"
         # linha 4
-        self.habilities.append(self.hability(41, nome[0] + k, descricao[0], custo, 30, self.size, 1))
-        self.habilities.append(self.hability(42, nome[1] + k, descricao[1], custo, 31, self.size, 1))
-        self.habilities.append(self.hability(43, nome[2] + k, descricao[2], custo, 32, self.size, 1))
-        self.habilities.append(self.hability(44, nome[3] + k, descricao[3], custo, 33, self.size, 1))
-        self.habilities.append(self.hability(45, nome[4] + k, descricao[4], custo, 34, self.size, 1))
-        self.habilities.append(self.hability(46, nome[5] + k, descricao[5], custo, 35, self.size, 1))
-        self.habilities.append(self.hability(47, nome[6] + k, descricao[6], custo, 36, self.size, 1))
-        self.habilities.append(self.hability(48, nome[7] + k, descricao[7], custo, 37, self.size, 1))
-        self.habilities.append(self.hability(49, nome[8] + k, descricao[8], custo, 38, self.size, 1))
-        self.habilities.append(self.hability(50, nome[9] + k, descricao[9], custo, 39, self.size, 1))
-        self.habilities.append(self.hability(51, nome[10] + k, descricao[10], custo, 40, self.size, 1))
+        self.habilities.append(self.hability(41, nome[0], descricao[0], custo, 30, self.size, 1))
+        self.habilities.append(self.hability(42, nome[1], descricao[1], custo, 31, self.size, 1))
+        self.habilities.append(self.hability(43, nome[2], descricao[2], custo, 32, self.size, 1))
+        self.habilities.append(self.hability(44, nome[3], descricao[3], custo, 33, self.size, 1))
+        self.habilities.append(self.hability(45, nome[4], descricao[4], custo, 34, self.size, 1))
+        self.habilities.append(self.hability(46, nome[5], descricao[5], custo, 35, self.size, 1))
+        self.habilities.append(self.hability(47, nome[6], descricao[6], custo, 36, self.size, 1))
+        self.habilities.append(self.hability(48, nome[7], descricao[7], custo, 37, self.size, 1))
+        self.habilities.append(self.hability(49, nome[8], descricao[8], custo, 38, self.size, 1))
+        self.habilities.append(self.hability(50, nome[9], descricao[9], custo, 39, self.size, 1))
+        self.habilities.append(self.hability(51, nome[10], descricao[10], custo, 40, self.size, 1))
         k = " V"
         # linha 5
-        self.habilities.append(self.hability(52, nome[0] + k, descricao[0], custo, 41, self.size, 1))
-        self.habilities.append(self.hability(53, nome[1] + k, descricao[1], custo, 42, self.size, 1))
-        self.habilities.append(self.hability(54, nome[2] + k, descricao[2], custo, 43, self.size, 1))
-        self.habilities.append(self.hability(55, nome[3] + k, descricao[3], custo, 44, self.size, 1))
-        self.habilities.append(self.hability(56, nome[4] + k, descricao[4], custo, 45, self.size, 1))
-        self.habilities.append(self.hability(57, nome[5] + k, descricao[5], custo, 46, self.size, 1))
-        self.habilities.append(self.hability(58, nome[6] + k, descricao[6], custo, 47, self.size, 1))
-        self.habilities.append(self.hability(59, nome[7] + k, descricao[7], custo, 48, self.size, 1))
-        self.habilities.append(self.hability(60, nome[8] + k, descricao[8], custo, 49, self.size, 1))
-        self.habilities.append(self.hability(61, nome[9] + k, descricao[9], custo, 50, self.size, 1))
-        self.habilities.append(self.hability(62, nome[10] + k, descricao[10], custo, 51, self.size, 1))
+        self.habilities.append(self.hability(52, nome[0], descricao[0], custo, 41, self.size, 1))
+        self.habilities.append(self.hability(53, nome[1], descricao[1], custo, 42, self.size, 1))
+        self.habilities.append(self.hability(54, nome[2], descricao[2], custo, 43, self.size, 1))
+        self.habilities.append(self.hability(55, nome[3], descricao[3], custo, 44, self.size, 1))
+        self.habilities.append(self.hability(56, nome[4], descricao[4], custo, 45, self.size, 1))
+        self.habilities.append(self.hability(57, nome[5], descricao[5], custo, 46, self.size, 1))
+        self.habilities.append(self.hability(58, nome[6], descricao[6], custo, 47, self.size, 1))
+        self.habilities.append(self.hability(59, nome[7], descricao[7], custo, 48, self.size, 1))
+        self.habilities.append(self.hability(60, nome[8], descricao[8], custo, 49, self.size, 1))
+        self.habilities.append(self.hability(61, nome[9], descricao[9], custo, 50, self.size, 1))
+        self.habilities.append(self.hability(62, nome[10], descricao[10], custo, 51, self.size, 1))
 
         # discionario de habilidades {id: status}
         self.habilities_status = {}
@@ -433,14 +433,14 @@ class HabilityTree:
             self.cost = cost
             self.father = father
             self.size = size
-            # self.icon_0 = pg.image.load('assets/icons/habilityTree/' + name + '_0.png')
+            self.icon_0 = pg.image.load('assets/icons/habilityTree/' + name + '_0.png')
+            self.icon_0 = pg.transform.scale(self.icon_0, (size*8/10, size*8/10))
+            self.icon_1 = pg.image.load('assets/icons/habilityTree/' + name + '_1.png')
+            self.icon_1 = pg.transform.scale(self.icon_1, (size*8/10, size*8/10))
+            # self.icon_0 = pg.image.load('assets/icons/habilityTree/' + 'accuracy' + '_0.png')
             # self.icon_0 = pg.transform.scale(self.icon_0, (size, size))
-            # self.icon_1 = pg.image.load('assets/icons/habilityTree/' + name + '_1.png')
+            # self.icon_1 = pg.image.load('assets/icons/habilityTree/' + 'accuracy' + '_1.png')
             # self.icon_1 = pg.transform.scale(self.icon_1, (size, size))
-            self.icon_0 = pg.image.load('assets/icons/habilityTree/' + 'accuracy' + '_0.png')
-            self.icon_0 = pg.transform.scale(self.icon_0, (size, size))
-            self.icon_1 = pg.image.load('assets/icons/habilityTree/' + 'accuracy' + '_1.png')
-            self.icon_1 = pg.transform.scale(self.icon_1, (size, size))
             self.status = 0
             self.selected = False
             self.hor_space = hor_space
@@ -451,15 +451,15 @@ class HabilityTree:
             if self.status == 0:
                 # desenhar fundo cinza do icone circular
                 pg.draw.circle(screen, (30, 30, 30), (x + self.size//2, y + self.size//2), self.size//2+self.size//10)
-                screen.blit(self.icon_0, (x, y))
+                screen.blit(self.icon_0, (x+self.size*0.1, y+self.size*0.1))
             elif self.status == 1:
                 # desenhar fundo cinza do icone circular
-                pg.draw.circle(screen, (150, 150, 150), (x + self.size//2, y + self.size//2), self.size//2+self.size//10)
-                screen.blit(self.icon_0, (x, y))
+                pg.draw.circle(screen, (100, 100, 100), (x + self.size//2, y + self.size//2), self.size//2+self.size//10)
+                screen.blit(self.icon_0, (x+self.size*0.1, y+self.size*0.1))
             elif self.status == 2:
                 # desenhar fundo cinza do icone circular
                 pg.draw.circle(screen, (150, 150, 150), (x + self.size//2, y + self.size//2), self.size//2+self.size//10)
-                screen.blit(self.icon_1, (x, y))
+                screen.blit(self.icon_1, (x+self.size*0.1, y+self.size*0.1))
             
             if self.selected:
                 # desenhar circulo vermelho

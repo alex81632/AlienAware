@@ -46,7 +46,6 @@ class ObjectRender:
         texture = pg.image.load(path).convert_alpha()
         return pg.transform.scale(texture, res)
 
-    def load_textures(self):
-        esc = randint(1, 10)
-        path = f'Recursos\Texturas\pxp{esc}.png'
+    def load_textures(self, esc = 0):
+        path = f'Recursos\Texturas\lv{esc}.png'
         return{1: self.get_textures(path)}

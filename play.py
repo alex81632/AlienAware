@@ -89,7 +89,7 @@ class Play:
             self.waveController.update()
 
         # se o jogador chegou ao fim do mapa, vai para o próximo
-        if self.player.y > self.constants.map_height - 1 or self.player.y > 10:
+        if self.player.y > self.constants.map_height - 1:
             self.next_map()
 
         # se a vida for menor que 0, volta pro mapa inicial
@@ -104,15 +104,26 @@ class Play:
         self.gameMap.next_map()
         if self.constants.mapa_atual == 3 and not self.constants.finished:
             self.waveController = waveController(self)
+            self.objectRender.wall_texture = self.objectRender.load_textures(3)
+            self.raycasting.textures = self.objectRender.wall_texture
         self.object_handler.remove_enemies()
         self.object_handler.remove_all_potions()
         self.pathfinding = PathFinding(self)
         if self.constants.mapa_atual == 1:
             self.object_handler.spawn_enemies(20)
             self.object_handler.spawn_potions(10 + int(self.constants.flasks_factor))
+            self.objectRender.wall_texture = self.objectRender.load_textures(1)
+            self.raycasting.textures = self.objectRender.wall_texture
         elif self.constants.mapa_atual == 2:
             self.object_handler.spawn_enemies(30)
             self.object_handler.spawn_potions(10 + int(self.constants.flasks_factor))
+            self.objectRender.wall_texture = self.objectRender.load_textures(2)
+            self.raycasting.textures = self.objectRender.wall_texture
+        elif self.constants.mapa_atual > 3 or (self.constants.mapa_atual ==3 and self.constants.finished):
+            self.object_handler.spawn_enemies(40)
+            self.object_handler.spawn_potions(10 + int(self.constants.flasks_factor))
+            self.objectRender.wall_texture = self.objectRender.load_textures(3)
+            self.raycasting.textures = self.objectRender.wall_texture
         # atualiza o jogador para a nova posição
         self.player.x, self.player.y = self.constants.player_initial_position
         self.player.angle = self.constants.player_initial_angle
@@ -142,6 +153,8 @@ class Play:
         self.object_handler.remove_all_sprites()
         self.object_handler.spawn_portal()
         self.object_handler.spaw_initial_objects()
+        self.objectRender.wall_texture = self.objectRender.load_textures()
+        self.raycasting.textures = self.objectRender.wall_texture
         
     def draw(self):
         self.objectRender.draw()
@@ -157,4 +170,7 @@ class Play:
         
         if self.constants.mapa_atual == 0 and self.player.x>3.5 and self.player.x<5 and self.player.y>5 and self.player.y<6:
             text = self.font.render("Máquina Quebrada, tente outra hora", True, (255, 255, 255))
-            self.screen.blit(text, (self.constants.width/2 - text.get_width()/2, self.constants.height - text.get_height() - self.constants.padding)) 
+            self.screen.blit(text, (self.constants.width/2 - text.get_width()/2, self.constants.height - text.get_height() - self.constants.padding))
+        
+        # desenhar dot no meio da tela
+        pg.draw.circle(self.screen, (200, 200, 200), (self.constants.width//2, self.constants.height//2), 3)

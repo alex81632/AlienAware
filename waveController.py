@@ -13,7 +13,7 @@ class waveController:
         self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.game.constants.font_size)//2)
         self.font_l = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.game.constants.font_size))
         self.time = time.time()
-        self.timer = 3*6
+        self.timer = 3*60
 
     def update(self):
         while self.wave_enemies_alive < self.wave_enemies_alive_max and self.wave_enemies_spawned < self.wave_enemies:
