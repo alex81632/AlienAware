@@ -19,11 +19,8 @@ class ObjectRender:
         self.screen.blit(self.blood_screen, (0, 0))
 
     def draw_bg(self):
-        self.sky_offset = (self.sky_offset + 4.0 * self.game.player.rel) % self.game.constants.width
-        self.screen.blit(self.sky_image, (-self.sky_offset, 0))
-        self.screen.blit(self.sky_image, (-self.sky_offset + self.game.constants.width, 0))
-
-        pg.draw.rect(self.screen, self.game.constants.floor_color, (0, self.game.constants.half_height, self.game.constants.width, self.game.constants.height))
+        # desenhar o chão
+        self.screen.fill(self.game.constants.floor_color)
 
     def objects_for_render(self):
         if self.game.constants.invisibilidade:
@@ -32,12 +29,12 @@ class ObjectRender:
             obj_list = sorted(self.game.raycasting.obj_to_render, key=lambda t: t[0], reverse=True)
         for depth, image, position in obj_list:
             # para objetos mais distantes, diminuir o brightness
-            brightness = 220 - (255 * depth*self.game.constants.transp_factor / self.game.constants.max_depth)
-            if brightness < 0:
-                brightness = 0
-            if brightness > 255:
-                brightness = 255
-            image.fill((brightness, brightness, brightness), special_flags=pg.BLEND_RGB_MULT)
+            # brightness = 220 - (255 * depth*self.game.constants.transp_factor / self.game.constants.max_depth)
+            # if brightness < 0:
+            #     brightness = 0
+            # if brightness > 255:
+            #     brightness = 255
+            # image.fill((brightness, brightness, brightness), special_flags=pg.BLEND_RGB_MULT)
 
             self.screen.blit(image, position)
 

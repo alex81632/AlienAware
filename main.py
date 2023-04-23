@@ -10,6 +10,7 @@ from saveState import saveState
 
 class Game:
     def __init__(self):
+        """ Initialize the game window, etc. """
         pg.init()
         pg.mouse.set_visible(False)
         self.screen = pg.display.set_mode((0,0), pg.FULLSCREEN)
