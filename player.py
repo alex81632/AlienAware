@@ -25,10 +25,13 @@ class Player:
                 self.game.constants.player_ammo -= 1
                 if self.game.constants.player_ammo <= 0:
                     self.time = time.time()
+            elif event.button == 1 and not self.game.weapon.reloading:
+                self.game.sound.mun_out.play()
     
     def reload(self):
         if self.game.constants.player_ammo <= 0 and time.time() - self.time > 4 - self.game.constants.time_factor:
             self.game.constants.player_ammo = self.game.constants.player_max_ammo + self.game.constants.ammo_factor
+            self.game.sound.reload.play()
 
     def moviment(self):
         sen_a = math.sin(self.angle)

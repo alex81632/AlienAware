@@ -77,6 +77,7 @@ class Play:
             self.player.reload()
 
     def update(self):
+        self.sound.play_music()
         if self.constants.restart_tree == True:
             self.habilityTree = HabilityTree(self.screen, self.constants)
             self.constants.restart_tree = False
