@@ -77,6 +77,11 @@ class Play:
             self.player.reload()
 
     def update(self):
+        if self.constants.current_music != self.sound.tension:
+            pg.mixer.stop()
+            self.sound.playing_music = False
+            self.sound.current_music = self.sound.tension
+            self.constants.current_music = self.sound.tension
         self.sound.play_music()
         if self.constants.restart_tree == True:
             self.habilityTree = HabilityTree(self.screen, self.constants)
