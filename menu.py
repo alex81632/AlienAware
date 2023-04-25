@@ -1,5 +1,6 @@
 import pygame as pg
 import math
+from sound import Sound
 
 class Menu:
     def __init__(self, screen, constants):
@@ -7,6 +8,7 @@ class Menu:
         self.constants = constants
         self.selected = 0
         self.num_options = 3
+        self.sound = Sound(self)
         self.logo = pg.image.load('assets/overlays/logoMenu.png')
         self.logo = pg.transform.scale(self.logo, (self.constants.width, self.constants.height))
         self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
@@ -35,6 +37,12 @@ class Menu:
                         self.selected = 0
     
     def update(self):
+        if self.constants.current_music != self.sound.epic:
+            pg.mixer.stop()
+            self.sound.playing_music = False
+            self.sound.current_music = self.sound.epic
+            self.constants.current_music = self.sound.epic
+        self.sound.play_music()
         self.stars.update()
         
     def draw(self):

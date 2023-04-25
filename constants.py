@@ -1,6 +1,7 @@
 import math
 import numpy as np
 import time
+import pygame as pg
 
 class Constants:
     def __init__(self, width, height):
@@ -73,6 +74,7 @@ class Constants:
 
         # sound
         self.sound_volume = 1
+        self.current_music = None
 
         # time
         self.time = time.time()
