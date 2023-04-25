@@ -22,6 +22,7 @@ class Player:
                 self.game.sound.shotgun.play()
                 self.fire = True
                 self.game.weapon.reloading = True
+                self.game.weapon.change_state('fire')
                 self.game.constants.player_ammo -= 1
                 if self.game.constants.player_ammo <= 0:
                     self.time = time.time()
@@ -29,6 +30,9 @@ class Player:
                 self.game.sound.mun_out.play()
     
     def reload(self):
+        if self.game.constants.player_ammo <= 0 and time.time() - self.time > 3 - self.game.constants.time_factor:
+            self.game.weapon.change_state('reload')
+
         if self.game.constants.player_ammo <= 0 and time.time() - self.time > 4 - self.game.constants.time_factor:
             self.game.constants.player_ammo = self.game.constants.player_max_ammo + self.game.constants.ammo_factor
             self.game.sound.reload.play()
@@ -55,6 +59,11 @@ class Player:
             dx += -velocidade_seno
             dy += velocidade_cosseno
         self.look_for_colision(dx,dy)
+
+        if (dx != 0 or dy != 0) and (self.game.weapon.state == 'idle' or self.game.weapon.state == 'walk'):
+            self.game.weapon.change_state('walk')
+        elif self.game.weapon.state == 'walk':
+            self.game.weapon.change_state('idle')
 
         self.angle %=2*math.pi
 
