@@ -136,6 +136,10 @@ class Play:
 
         # atualiza o minimapa para a nova posição
         self.miniMap = MiniMap(self)
+        self.constants.minimap_state = not self.constants.minimap_state
+        self.constants.resize_minimap(self.constants.minimap_state)
+        self.constants.minimap_state = not self.constants.minimap_state
+        self.constants.resize_minimap(self.constants.minimap_state)
         self.object_handler.remove_all_sprites()
         self.object_handler.spawn_portal()
     

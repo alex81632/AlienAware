@@ -30,10 +30,10 @@ class Player:
                 self.game.sound.mun_out.play()
     
     def reload(self):
-        if self.game.constants.player_ammo <= 0 and time.time() - self.time > 3 - self.game.constants.time_factor:
+        if self.game.constants.player_ammo <= 0 and time.time() - self.time > 1.7 - self.game.constants.time_factor:
             self.game.weapon.change_state('reload')
 
-        if self.game.constants.player_ammo <= 0 and time.time() - self.time > 4 - self.game.constants.time_factor:
+        if self.game.constants.player_ammo <= 0 and time.time() - self.time > 3 - self.game.constants.time_factor:
             self.game.constants.player_ammo = self.game.constants.player_max_ammo + self.game.constants.ammo_factor
             self.game.sound.reload.play()
 

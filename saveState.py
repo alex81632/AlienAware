@@ -93,7 +93,7 @@ class saveState:
 
     def handle_selection(self):
         if self.selected == 0:
-            self.constants.state = 1
+            self.constants.state = 7
             self.selected = 0
         if self.selected == 1:
             self.selected = 0

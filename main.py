@@ -7,6 +7,7 @@ from play import Play
 from settings import Settings
 from mapTransitions import mapTransitions
 from saveState import saveState
+from tutorial import Tutorial
 
 class Game:
     def __init__(self):
@@ -14,17 +15,24 @@ class Game:
         pg.init()
         pg.mouse.set_visible(False)
         self.screen = pg.display.set_mode((0,0), pg.FULLSCREEN)
-        self.clock = pg.time.Clock()
         self.constants = Constants(self.screen.get_width(), self.screen.get_height())
+        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
+        # loading screen
+        self.screen.fill((0,0,0))
+        text = self.font.render("Loading...", 1, (200,200,200))
+        self.screen.blit(text, (self.screen.get_width()/2 - text.get_width()/2, self.screen.get_height()/2 - text.get_height()/2))
+        pg.display.flip()
+        self.clock = pg.time.Clock()
         self.menu = Menu(self.screen, self.constants)
         self.pause = Pause(self.screen, self.constants)
         self.play = Play(self.screen, self.constants)
         self.settings = Settings(self.screen, self.constants)
         self.mapTransitions = mapTransitions(self.screen, self.constants)
         self.saveState = saveState(self.screen, self.constants)
-        self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
+        self.tutorial = Tutorial(self.screen, self.constants)
         
-        # 0 = menu, 1 = game, 2 = pause, 3 = settings, 4 = mapTransitions, 5 = habilityTree, 6 = saves
+        
+        # 0 = menu, 1 = game, 2 = pause, 3 = settings, 4 = mapTransitions, 5 = habilityTree, 6 = saves, 7 = tutorial
 
     def display_fps(self):
         # display fps at the top of the screen
@@ -63,6 +71,9 @@ class Game:
                 self.saveState.check_events()
                 self.saveState.update()
                 self.saveState.draw()
+            elif self.constants.state == 7:
+                self.tutorial.check_events()
+                self.tutorial.draw()
             self.display_fps()
             pg.display.flip()
         pg.quit()
