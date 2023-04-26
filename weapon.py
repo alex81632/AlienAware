@@ -6,7 +6,9 @@ import time
 
 
 class Weapon(AnimatedSprite):
+    '''classe que representa a arma do jogador'''
     def __init__(self, game):
+        '''inicializa a arma'''
         self.game = game
         self.constants = game.constants        
         self.reloading = False
@@ -31,6 +33,7 @@ class Weapon(AnimatedSprite):
         self.time_per_frame = 1 / self.fps
 
     def change_state(self, state):
+        '''muda o estado da arma'''
         if state != self.state:
             self.state = state
             if state == 'idle':
@@ -49,6 +52,7 @@ class Weapon(AnimatedSprite):
             self.frame_counter = 0
 
     def update(self):
+        '''atualiza a arma'''
         # atualiza o frame da animação
         if time.time() - self.time_last_frame > self.time_per_frame:
             self.frame_counter += 1
@@ -71,10 +75,12 @@ class Weapon(AnimatedSprite):
 
     
     def draw(self):
+        '''desenha a arma'''
         self.screen.blit(self.image, (0,0))
  
 
     def get_images(self, path):
+        '''retorna uma lista com as imagens de uma pasta'''
         images = deque()
         for file_name in os.listdir(path):
             if os.path.isfile(os.path.join(path, file_name)):

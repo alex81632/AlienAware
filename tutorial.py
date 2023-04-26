@@ -4,7 +4,9 @@ import time
 import os
 
 class Tutorial:
+    '''classe que mostra o tutorial'''
     def __init__(self, screen, constants):
+        '''inicializa o tutorial'''
         self.screen = screen
         self.constants = constants
         # importe o arquivo de imagem saveOverlay.png da pasta assets/overlays
@@ -14,6 +16,7 @@ class Tutorial:
 
 
     def check_events(self):
+        '''checa os eventos do teclado'''
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.constants.running = False
@@ -22,6 +25,7 @@ class Tutorial:
                     self.constants.state = 1
         
     def draw(self):
+        '''desenha o tutorial'''
         # fundo preto
         self.screen.fill((0,0,0))
         

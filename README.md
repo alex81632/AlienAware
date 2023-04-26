@@ -1,8 +1,6 @@
 # AlienAware
 ## Descrição
 ** Inserir **
-## Sinopse
-** Inserir **
 ## História
 A história se passa em um futuro próximo, em 2050. Seu pai, astronauta famoso, é chamado para uma missão de reconhecimento em uma nave que levava pessoas em criogenia para habitar marte.
 Ocorre um erro mecânico, e a nave que seu pai estava explode ao chegar perto do objetivo. Os passageiros continuaram em criogenia aguardando a próxima missão.

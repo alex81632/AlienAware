@@ -2,8 +2,9 @@ import pygame as pg
 from random import randint
 
 class ObjectRender:
-
+    '''classe para renderizar os objetos do jogo'''
     def __init__(self, game):
+        '''inicializa as variaveis'''
         self.game = game
         self.screen = game.screen
         self.wall_texture = self.load_textures()
@@ -12,17 +13,21 @@ class ObjectRender:
         self.blood_screen = self.get_textures('Recursos\Texturas\Blood_screen.png',(self.game.constants.width, self.game.constants.height))
 
     def draw(self):
+        '''desenha os objetos na tela'''
         self.draw_bg()
         self.objects_for_render()
 
     def player_damage(self):
+        '''desenha a tela de dano do jogador'''
         self.screen.blit(self.blood_screen, (0, 0))
 
     def draw_bg(self):
+        '''desenha o background'''
         # desenhar o chão
         self.screen.fill(self.game.constants.floor_color)
 
     def objects_for_render(self):
+        '''desenha os objetos na tela'''
         if self.game.constants.invisibilidade:
             obj_list = self.game.raycasting.obj_to_render
         else:
@@ -40,9 +45,11 @@ class ObjectRender:
 
     @staticmethod
     def get_textures(path, res= (256, 256)):
+        '''carrega as texturas'''
         texture = pg.image.load(path).convert_alpha()
         return pg.transform.scale(texture, res)
 
     def load_textures(self, esc = 0):
+        '''carrega as texturas do jogo'''
         path = f'Recursos\Texturas\lv{esc}.png'
         return{1: self.get_textures(path)}

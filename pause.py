@@ -3,7 +3,9 @@ import sys
 from constants import Constants
 
 class Pause:
+    '''Classe que representa a tela de pause do jogo'''
     def __init__(self, screen, constants):
+        '''inicializa as variaveis'''
         self.screen = screen
         self.constants = constants
         self.selected = 0
@@ -17,6 +19,7 @@ class Pause:
         self.pauseOverlay = pg.transform.scale(self.pauseOverlay, (self.constants.width, self.constants.height))
 
     def check_events(self):
+        '''checa os eventos do teclado'''
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.constants.running = False
@@ -43,9 +46,11 @@ class Pause:
                         self.selected = 0
     
     def update(self):
+        '''atualiza o menu'''
         pass
         
     def draw(self):
+        '''desenha o menu'''
         if self.first:
             self.first = False
             # desenhe a imagem na tela

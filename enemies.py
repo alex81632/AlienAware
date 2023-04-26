@@ -5,6 +5,7 @@ import pygame as pg
 
 
 class Inimigo(AnimatedSprite):
+    '''iniciliza o inimigo'''
     def __init__(self, game, path='Recursos/Inimigos/Zumbi-soldado/0.png', pos=(10.5, 5.5),
                  scale=0.6, shift=0.38, animation_time=180):
         super().__init__(game, path, pos, scale, shift, animation_time)
@@ -33,18 +34,19 @@ class Inimigo(AnimatedSprite):
         self.get_sprite()
         self.run_logic()
         # self.draw_ray_cast()
-
+    
     def check_wall(self, x, y):
         return (x, y) not in self.game.gameMap.map_complt
 
     def check_wall_collision(self, dx, dy):
+        '''checa a colisão do inimigo com a parede'''
         if self.check_wall(int(self.x + dx * self.size), int(self.y)):
             self.x += dx
         if self.check_wall(int(self.x), int(self.y + dy * self.size)):
             self.y += dy
-
+    
     def movement(self):
-
+        '''define o moviemnto do inimigo'''
         if self.ray_cast_player_enemy():
 
             next_pos = self.game.player.map_position
@@ -64,8 +66,9 @@ class Inimigo(AnimatedSprite):
                 dx = math.cos(angle) * self.speed
                 dy = math.sin(angle) * self.speed
                 self.check_wall_collision(dx, dy)
-
+    
     def attack(self):
+        '''define a logica de ataque do inimigo'''
         if self.animation_trigger:
             if self.type == 'dist':
                 self.game.sound.enemy_shot.play()
@@ -76,8 +79,9 @@ class Inimigo(AnimatedSprite):
                     self.game.player.get_damage(self.attack_damage//self.game.constants.long_range_factor)
                 else:
                     self.game.player.get_damage(self.attack_damage//self.game.constants.short_range_factor)
-
+    
     def animate_death(self):
+        '''defina a animação do inimigo'''
         if not self.alive:
             if self.game.global_trigger and self.frame_counter < len(self.death_images) - 1:
                 self.death_images.rotate(-1)
@@ -88,8 +92,9 @@ class Inimigo(AnimatedSprite):
         self.animate(self.pain_images)
         if self.animation_trigger:
             self.pain = False
-
+    
     def check_hit_in_enemy(self):
+        '''checa se o inimigo foi atingido'''
         if self.ray_cast_value and self.game.player.fire:
             if self.game.constants.half_width - self.sprite_half_width < self.screen_x < self.game.constants.half_width + self.sprite_half_width:
                 self.game.sound.enemy_pain.play()
@@ -99,6 +104,7 @@ class Inimigo(AnimatedSprite):
                 self.check_health()
 
     def check_health(self):
+        '''checa a vida do inimigo'''
         if self.alive:
             if self.health < 1:
                 self.alive = False
@@ -109,6 +115,7 @@ class Inimigo(AnimatedSprite):
                 self.game.waveController.wave_enemies_alive -= 1
 
     def run_logic(self):
+        '''roda a logica do inimigo'''
         if self.alive:
             self.ray_cast_value = self.ray_cast_player_enemy()
             self.check_hit_in_enemy()
@@ -138,8 +145,9 @@ class Inimigo(AnimatedSprite):
     @property
     def map_pos(self):
         return int(self.x), int(self.y)
-
+   
     def ray_cast_player_enemy(self):
+        '''checa se o player está no campo de visão do inimigo'''
         if self.game.player.map_position == self.map_pos:
             return True
 
@@ -204,6 +212,7 @@ class Inimigo(AnimatedSprite):
         return False
 
     def draw_ray_cast(self):
+        '''desenha o raycast do inimigo'''
         pg.draw.circle(self.game.screen, 'red', (100 * self.x, 100 * self.y), 15)
         if self.ray_cast_player_enemy():
             pg.draw.line(self.game.screen, 'orange', (100 * self.game.player.x, 100 * self.game.player.y),
@@ -211,11 +220,13 @@ class Inimigo(AnimatedSprite):
 
 
 class SoldierNPC(Inimigo):
+    ''''classe que controi cada inimigo do jogo'''
     def __init__(self, game, path='Recursos/Inimigos/Zumbi-soldado/0.png', pos=(10.5, 5.5),
                  scale=0.6, shift=0.38, animation_time=180):
         super().__init__(game, path, pos, scale, shift, animation_time)
 
 class CacoDemonNPC(Inimigo):
+    ''''classe que controi cada inimigo do jogo'''
     def __init__(self, game, path='Recursos/Inimigos/Caco_demon/0.png', pos=(10.5, 6.5),
                  scale=0.7, shift=0.27, animation_time=250):
         super().__init__(game, path, pos, scale, shift, animation_time)

@@ -25,6 +25,7 @@ class GameMap:
         self.invert_map()
     
     def next_map(self):
+        '''função que gera o próximo mapa'''
         self.game.constants.map_height = 50
         self.game.constants.map_width = 21
         self.game.constants.mapa_atual += 1
@@ -42,6 +43,7 @@ class GameMap:
 
 
     def const_mapa(self):
+        '''função que constroi um dicionário com as posições das paredes do mapa'''
         for i,coluna in enumerate(self.game_map):
             for j, valor in enumerate(coluna):
                 if valor == 1:
@@ -56,6 +58,7 @@ class GameMap:
 # o algorítmo de geração de mapas é feito com base em uma dfs para gerar um labirinto
 
     def generate_map(self, width, height):
+        '''função que gera um mapa de tamanho width x height'''
         visited = {}
         stack = []
         map_ = np.zeros((width, height))
@@ -103,8 +106,8 @@ class GameMap:
         #self.print_map(map_, visited)
 
         return map_
-
     def alg_dir(self, map_):
+        '''algoritmo que gera um labirinto com base em uma dfs'''
         height = len(map_)
         width = len(map_[0])
         for i in range(len(map_)):
@@ -119,6 +122,7 @@ class GameMap:
         return map_
 
     def alg_inv(self, map_):
+        '''algoritmo que gera um labirinto com base em uma dfs'''
         for i in range(len(map_)):
             for j in range(len(map_[i])):
                 if random.random() > 0.5:
@@ -134,6 +138,7 @@ class GameMap:
     # dfs com stack
 
     def dfs(self, map_, x, y, visited={}, stack=[]):
+        '''dfs com stack'''
         stack.append((x,y))
         while len(stack) > 0:
             current = stack.pop()
@@ -154,6 +159,7 @@ class GameMap:
             #     return
 
     def print_map(self, map_, visited={}):
+        '''printa o mapa'''
         for i in range(len(map_)):
             for j in range(len(map_[i])):
                 # se tiver em visited, printa #

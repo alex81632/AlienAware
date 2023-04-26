@@ -3,7 +3,9 @@ import random
 import time
 
 class waveController:
+    '''classe que controla as waves'''
     def __init__(self, game):
+        '''inicializa as waves'''
         self.game = game
         self.wave_enemies = 50
         self.wave_enemies_spawned = 0
@@ -16,6 +18,7 @@ class waveController:
         self.timer = 3*60
 
     def update(self):
+        '''atualiza as waves'''
         while self.wave_enemies_alive < self.wave_enemies_alive_max and self.wave_enemies_spawned < self.wave_enemies:
             self.spawn_enemy()
         # se matou todos os inimigos da wave ou se passaram 3 minutos
@@ -25,11 +28,13 @@ class waveController:
             self.game.reset_game()
     
     def spawn_enemy(self):
+        '''spawna um inimigo'''
         self.game.object_handler.spawn_enemies(1)
         self.wave_enemies_spawned += 1
         self.wave_enemies_alive += 1
 
     def draw(self):
+        '''desenha as waves'''
         # desenha o tempo que falta para terminar os 3 minutos
         text = self.font_l.render("Time: " + str(int(self.timer - (time.time() - self.time))), 1, (200,200,200))
         self.game.screen.blit(text, (self.game.screen.get_width()//2 - text.get_width()//2, 10))

@@ -15,7 +15,9 @@ from habilityTree import HabilityTree
 from waveController import waveController
 
 class Play:
+    '''classe que controla o jogo'''
     def __init__(self, screen, constants):
+        '''inicializa o jogo'''
         self.screen = screen
         self.constants = constants
         self.constants.load_game()
@@ -41,6 +43,7 @@ class Play:
 
 
     def check_events(self):
+        '''checa os eventos do teclado'''
         self.global_trigger = False
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -77,6 +80,7 @@ class Play:
             self.player.reload()
 
     def update(self):
+        '''atualiza o jogo'''
         if self.constants.current_music != self.sound.tension:
             pg.mixer.stop()
             self.sound.playing_music = False
@@ -103,6 +107,7 @@ class Play:
             self.reset_game()
 
     def next_map(self):
+        '''vai para o próximo mapa'''
         # tela de transição
         self.constants.state = 4
         self.constants.time = time.time()
@@ -144,6 +149,7 @@ class Play:
         self.object_handler.spawn_portal()
     
     def reset_game(self):
+        '''reseta o jogo'''
         self.constants.player_health = self.constants.player_max_health
         # tela de transição
         self.constants.state = 4
@@ -167,6 +173,7 @@ class Play:
         self.raycasting.textures = self.objectRender.wall_texture
         
     def draw(self):
+        '''desenha o jogo'''
         self.objectRender.draw()
         self.weapon.draw()
         self.screen.blit(self.overlay, (0,0))

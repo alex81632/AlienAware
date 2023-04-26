@@ -2,7 +2,9 @@ import pygame as pg
 import math
 
 class MiniMap:
+    '''classe que desenha o mini mapa'''
     def __init__(self, game):
+        '''inicializa o mini mapa'''
         self.game = game
         self.map = self.game.gameMap.map_inversed
         self.player = self.game.player
@@ -12,6 +14,7 @@ class MiniMap:
             self.map_alpha[(x,y)] = 0
         
     def draw(self):
+        '''desenha o mini mapa'''
         # desenhar o mini mapa no canto direito da tela
 
         # fazer a superficie do mini mapa

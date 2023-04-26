@@ -2,7 +2,9 @@ import pygame as pg
 import time
 
 class Sound:
+    '''Classe com as constantes do som'''
     def __init__(self, game):
+        '''Inicializa as constantes do som'''
         self.game = game
         pg.mixer.init()
         self.path = 'Recursos/Som/'
@@ -22,6 +24,7 @@ class Sound:
         self.current_music = None
     
     def play_music(self):
+        '''Toca a música tema do jogo'''
         if not self.playing_music:
                 self.current_music.set_volume(self.game.constants.sound_volume)
                 pg.mixer.Sound.play(self.current_music)
