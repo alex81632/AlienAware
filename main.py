@@ -35,6 +35,7 @@ class Game:
         # 0 = menu, 1 = game, 2 = pause, 3 = settings, 4 = mapTransitions, 5 = habilityTree, 6 = saves, 7 = tutorial
 
     def display_fps(self):
+        ''' Show the programs FPS in the window handle.'''
         # display fps at the top of the screen
         text = self.font.render("FPS: " + str(int(self.clock.get_fps())), 1, (200,200,200))
         # fundo preto para o texto do tamanho do texto
@@ -43,6 +44,7 @@ class Game:
         self.constants.actual_fps = self.clock.get_fps()
 
     def run(self):
+        ''' Run the game loop.'''
         while self.constants.running:
             self.constants.dt = self.clock.tick(self.constants.fps)
             if self.constants.state == 0:
@@ -80,5 +82,6 @@ class Game:
 
 
 if __name__ == '__main__':
+    ''' Create an instance of the Game class and start the game loop.'''
     game = Game()
     game.run()

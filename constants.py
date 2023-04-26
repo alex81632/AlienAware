@@ -1,10 +1,13 @@
+'''Arquivo com as constantes do jogo, como tamanho da tela, fps, etc.'''
 import math
 import numpy as np
 import time
 import pygame as pg
-
+'''Classe com as constantes do jogo'''
 class Constants:
+
     def __init__(self, width, height):
+        '''Inicializa as constantes da tela, fps, etc.'''
         self.width = width
         self.height = height
         self.half_width = width // 2
@@ -22,7 +25,7 @@ class Constants:
         self.invencible = False
         self.invisibilidade = False
         self.transp_factor = 1.5
-
+        '''Constantes do mapa'''
         # map
         self.map_width = 7
         self.map_height = 8
@@ -42,7 +45,7 @@ class Constants:
         self.minimap_border_color = (215, 0, 0)
         self.minimap_state = 0
         self.mapa_atual = 0
-
+        '''Constantes do jogador'''
         # player
         self.player_initial_position = self.map_width/2, 1.5
         self.player_initial_angle = math.pi/2
@@ -57,7 +60,7 @@ class Constants:
         self.player_coins = 0
         self.player_ammo = 5
         self.player_max_ammo = 4
-
+        '''Constantes do processo de raycasting'''
         # raycasting
         self.total_rays = self.width//2
         self.half_total_rays = self.total_rays//2
@@ -65,7 +68,7 @@ class Constants:
         self.max_depth = 20
         self.wall_distance = self.half_height/math.tan(self.player_fov_half)
         self.scale = self.width//self.total_rays
-
+        '''Constantes de entrada'''
         # mouse
         self.mouse_sensitivity = 0.0001
         self.max_mouse = 40
@@ -104,8 +107,9 @@ class Constants:
         self.flasks_factor = 0
         self.flask_room = 0 
         self.speed_factor = 1
-
+    
     def load_game(self):
+        '''Função que salva os valores do jogo em um arquivo save.txt'''
         try:
             with open('save.txt', 'r') as file:
                 self.coins_factor = float(file.readline())
@@ -166,6 +170,7 @@ class Constants:
                 self.finished = float(file.readline())
         
     def save_game(self):
+        '''Função que salva os valores do jogo em um arquivo save.txt'''
         with open('save.txt', 'w') as file:
             file.write(str(self.coins_factor) + '\n')
             file.write(str(self.precision_factor) + '\n')
@@ -185,8 +190,9 @@ class Constants:
             file.write(str(self.time_played) + '\n')
             file.write(str(self.finished) + '\n')
             
-
+    
     def redefine_fov(self, fov):
+        '''Função que redimensiona o campo de visão do jogador'''
         self.player_fov_scale = fov
         self.player_fov = self.player_fov_scale*math.pi/180
         self.player_fov_half = self.player_fov/2
@@ -194,6 +200,7 @@ class Constants:
         self.wall_distance = self.half_height/math.tan(self.player_fov_half)
     
     def resize_minimap(self, state):
+        '''Função que redimensiona o minimapa'''
         # se estado for 0, redimensiona o minimapa para o tamanho original
         if state == 0:
             self.minimap_size = 200*self.pixel

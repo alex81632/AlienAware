@@ -3,7 +3,9 @@ import math
 from sound import Sound
 
 class Menu:
+    '''classe que representa o menu principal do jogo'''
     def __init__(self, screen, constants):
+        '''inicializa as variaveis'''
         self.screen = screen
         self.constants = constants
         self.selected = 0
@@ -15,6 +17,7 @@ class Menu:
         self.stars = Stars(self.screen, self.constants)        
 
     def check_events(self):
+        '''checa os eventos do teclado'''
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 self.constants.running = False
@@ -37,6 +40,7 @@ class Menu:
                         self.selected = 0
     
     def update(self):
+        '''atualiza o menu'''
         if self.constants.current_music != self.sound.epic:
             pg.mixer.stop()
             self.sound.playing_music = False
@@ -46,6 +50,7 @@ class Menu:
         self.stars.update()
         
     def draw(self):
+        '''desenha o menu'''
         # fundo preto
         self.screen.fill((0,0,0))
         # fundo estrelado saindo do centro
@@ -69,7 +74,9 @@ class Menu:
         self.screen.blit(text, (self.constants.width - text.get_width() - self.constants.padding, self.constants.half_height - text.get_height()//2 + self.constants.padding*2))
 
 class Stars:
+    '''classe que representa as estrelas do menu'''
     def __init__(self, screen, constants, num_stars=400):
+        '''inicializa as variaveis'''
         self.screen = screen
         self.constants = constants
         self.stars = []
@@ -92,6 +99,7 @@ class Stars:
             self.update()
     
     def update(self):
+        '''atualiza as estrelas'''
         for i in range(len(self.stars)):
             self.stars[i] = (self.stars[i][0] + self.speed[i]*math.cos(math.radians(self.angles[i])), self.stars[i][1] + self.speed[i]*math.sin(math.radians(self.angles[i])))
             if self.stars[i][0] < 0 or self.stars[i][0] > self.constants.width or self.stars[i][1] < 0 or self.stars[i][1] > self.constants.height:
@@ -100,5 +108,6 @@ class Stars:
                 self.angles[i] = self.constants.random.randint(0, 360)
     
     def draw(self):
+        '''desenha as estrelas'''
         for i in range(len(self.stars)):
             pg.draw.circle(self.screen, self.color, self.stars[i], self.size)

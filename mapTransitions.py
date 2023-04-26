@@ -3,7 +3,9 @@ import time
 
 # classe para fazer um overlay de 3 segundos quando o jogador passa de mapa
 class mapTransitions:
+    '''classe para fazer um overlay de 3 segundos quando o jogador passa de mapa'''
     def __init__(self, screen, constants):
+        '''inicializa as variaveis'''
         self.screen = screen
         self.constants = constants
         self.font = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size)*5)
@@ -14,6 +16,7 @@ class mapTransitions:
         self.time = 10
 
     def draw(self):
+        '''desenha o overlay''' 
         # fundo preto do tamanho da tela
         pg.draw.rect(self.screen, (0,0,0), (0,0, self.constants.width, self.constants.height))
         # texto no centro da tela

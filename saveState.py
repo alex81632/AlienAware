@@ -4,7 +4,9 @@ import time
 import os
 
 class saveState:
+    '''classe que mostra o menu de save'''
     def __init__(self, screen, constants):
+        '''inicializa o menu de save'''
         self.screen = screen
         self.constants = constants
         self.selected = 0
@@ -20,6 +22,7 @@ class saveState:
 
 
     def check_events(self):
+        '''checa os eventos do teclado'''
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.constants.running = False
@@ -38,6 +41,7 @@ class saveState:
                     self.handle_selection()
         
     def draw(self):
+        '''desenha o menu de save'''
         # fundo preto
         self.screen.fill((0,0,0))
         # fundo estrelado saindo do centro
@@ -92,6 +96,7 @@ class saveState:
 
 
     def handle_selection(self):
+        '''lida com a seleção do menu'''
         if self.selected == 0:
             self.constants.state = 7
             self.selected = 0
@@ -117,11 +122,14 @@ class saveState:
             self.constants.restart_tree = True
     
     def update(self):
+        '''atualiza o menu de save'''
         self.stars.update()
 
         
 class Stars:
+    '''classe que gera as estrelas saindo do centro'''
     def __init__(self, screen, constants, num_stars=400):
+        '''inicializa as estrelas'''
         self.screen = screen
         self.constants = constants
         self.stars = []
@@ -144,6 +152,7 @@ class Stars:
             self.update()
     
     def update(self):
+        '''atualiza as estrelas'''
         for i in range(len(self.stars)):
             self.stars[i] = (self.stars[i][0] + self.speed[i]*math.cos(math.radians(self.angles[i])), self.stars[i][1] + self.speed[i]*math.sin(math.radians(self.angles[i])))
             if self.stars[i][0] < 0 or self.stars[i][0] > self.constants.width or self.stars[i][1] < 0 or self.stars[i][1] > self.constants.height:
@@ -152,5 +161,6 @@ class Stars:
                 self.angles[i] = self.constants.random.randint(0, 360)
     
     def draw(self):
+        '''desenha as estrelas'''
         for i in range(len(self.stars)):
             pg.draw.circle(self.screen, self.color, self.stars[i], self.size)

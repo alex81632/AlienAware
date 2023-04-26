@@ -4,14 +4,16 @@ import math
 # rc = raycasting
 
 class RayCasting:
-
+    '''classe que faz o raycasting'''
     def __init__(self, game):
+        '''inicializa o raycasting'''
         self.game = game
         self.rc_result = []
         self.obj_to_render = []
         self.textures = self.game.objectRender.wall_texture
 
     def objects_to_render(self):
+        '''retorna os objetos a serem renderizados'''
         self.obj_to_render = []
         for ray,values in enumerate(self.rc_result):
             depth, projec_height, texture, offset = values
@@ -29,6 +31,7 @@ class RayCasting:
 
 
     def ray_cast(self):
+        '''faz o raycasting'''
         self.rc_result = []
         ox, oy = self.game.player.pos
         x_map, y_map = self.game.player.map_position
@@ -106,5 +109,6 @@ class RayCasting:
             ray_angle += self.game.constants.ray_angle
 
     def update(self):
+        '''atualiza o raycasting'''
         self.ray_cast()
         self.objects_to_render()

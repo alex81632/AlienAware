@@ -2,7 +2,9 @@ import pygame as pg
 import os
 
 class HabilityTree:
+    '''classe que define a arvore de habilidades do jogador'''
     def __init__(self, screen, constants):
+        '''inicializa a classe'''
         self.screen = screen
         self.constants = constants
         self.padding = int(40*self.constants.pixel * (self.constants.width / 1920))
@@ -125,12 +127,14 @@ class HabilityTree:
         self.habilities_per_row = 11
 
     def save_game(self):
+        ''' salva o status das habilidades em um arquivo'''
         # salva habilities_status em um arquivo habilities.txt
         with open("habilities.txt", "w") as file:
             for i in range(len(self.habilities_status)-1):
                 file.write(str(self.habilities_status[i]) + "\n")
     
     def load_game(self):
+        ''' carrega o status das habilidades de um arquivo'''
         # se o arquivo habilities.txt existir, carrega as habilidades
         if os.path.exists("habilities.txt"):
             with open("habilities.txt", "r") as file:
@@ -147,6 +151,7 @@ class HabilityTree:
 
 
     def check_events(self):
+        ''' checa os eventos do teclado'''
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.constants.running = False
@@ -219,6 +224,7 @@ class HabilityTree:
                                 self.apply_hability(self.habilities[i].id)
         
     def apply_hability(self, id):
+        ''' aplica a habilidade selecionada'''
         idb = id - 8
         idb = idb % 11
         if idb == 0:
@@ -245,6 +251,7 @@ class HabilityTree:
             self.constants.speed_factor  += 0.1
     
     def update(self):
+        ''' atualiza a tela'''
         # passar por todas as classes subclasses e habiliades atualizando
         for i in range(len(self.classes)):
             if self.classes[i].id == self.selected:
@@ -325,6 +332,7 @@ class HabilityTree:
             
         
     def draw(self):
+        '''desenha a tela de arvore de habilidades'''
         # desenhar fundo
         self.screen.fill((0,0,0))
         # desenhar titulo
@@ -339,11 +347,13 @@ class HabilityTree:
         self.draw_description()
 
     def draw_title(self):
+        '''desenha o titulo da tela de arvore de habilidades'''
         # desenhar o titulo na tela
         text = self.font_title.render("Árvore de Habilidades", True, (255,255,255))
         self.screen.blit(text, (self.constants.width/2 - text.get_width()/2, self.padding*2))
 
     def draw_description(self):
+        '''desenha a descrição do selecionado na arvore'''
         # desenhar a descrição do selecionado na arvore no meio da tela em baixo
         if self.selected != -1:
             description = self.get_description(self.selected)
@@ -352,6 +362,7 @@ class HabilityTree:
             self.screen.blit(text, (self.constants.width/2 - text.get_width()/2, self.constants.height - self.padding - text.get_height()))
 
     def get_description(self, id):
+        '''retorna a descrição do id passado'''
         for i in range(len(self.classes)):
             if self.classes[i].id == id:
                 return self.classes[i].description
@@ -363,6 +374,7 @@ class HabilityTree:
                 return self.habilities[i].description
     
     def get_name(self, id):
+        '''retorna o nome do id passado'''
         for i in range(len(self.classes)):
             if self.classes[i].id == id:
                 return self.classes[i].name
@@ -374,6 +386,7 @@ class HabilityTree:
                 return self.habilities[i].name
 
     def draw_tree(self):
+        '''desenha a arvore de habilidades'''
         space = (self.constants.width - 2*self.constants.padding)/11
         x = self.padding
         y = self.padding*8
@@ -406,6 +419,7 @@ class HabilityTree:
             x += self.habilities[i].hor_space*space
     
     def draw_lines(self):
+        '''desenha as linhas que ligam os elementos da arvore de habilidades'''
         for i in range(len(self.classes)):
             for j in range(len(self.subClasses)):
                 if self.subClasses[j].father == self.classes[i].id:
@@ -421,11 +435,13 @@ class HabilityTree:
                     pg.draw.line(self.screen, (255,255,255), (self.habilities[i].x+self.size/2, self.habilities[i].y+self.size), (self.habilities[j].x+self.size/2, self.habilities[j].y), 1)
 
     def draw_coins(self):
+        '''desenha a quantidade de moedas do jogador'''
         # desenha moedas no canto direito inferior
         text = self.font.render("Recursos: "+str(int(self.constants.player_coins)), True, (255,255,255))
         self.screen.blit(text, (self.constants.width - text.get_width() - self.padding, self.constants.height - text.get_height() - self.padding))
 
     class hability:
+        '''classe que representa uma habilidade'''
         def __init__(self,id , name, description, cost, father, size, hor_space):
             self.id = id
             self.name = name
@@ -448,6 +464,7 @@ class HabilityTree:
             self.y = 0
 
         def draw(self, screen, x, y):
+            '''desenha a habilidade na tela'''
             if self.status == 0:
                 # desenhar fundo cinza do icone circular
                 pg.draw.circle(screen, (30, 30, 30), (x + self.size//2, y + self.size//2), self.size//2+self.size//10)

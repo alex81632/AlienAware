@@ -4,7 +4,9 @@ from enemies import *
 from potion import Potion
 
 class ObjectHandler:
+    '''classe que gerencia os objetos do jogo'''
     def __init__(self, game):
+        '''inicializa o objeto'''
         self.game = game
         self.sprite_list = []
         self.enemies_list = []
@@ -31,10 +33,12 @@ class ObjectHandler:
 
 
     def spaw_initial_objects(self):
+        '''spawna os objetos iniciais do mapa'''
         self.add_sprite(AnimatedSprite(self.game, path=self.anim_sprite_path + 'computer/comp_0.png', pos=(2.5, 6.8)))
         self.add_sprite(AnimatedSprite(self.game, path=self.anim_sprite_path + 'vendingMachine/vm_0.png', pos=(4.5, 6.8)))
 
     def spawn_portal(self):
+        '''spawna o portal de saida do mapa'''
         h = self.game.constants.map_height
         w = self.game.constants.map_width
         x = w/2
@@ -43,6 +47,7 @@ class ObjectHandler:
 
 
     def spawn_enemies(self, number):
+        '''spawna inimigos aleatorios no mapa'''
         for i in range(number):
             enemy = choices(self.enemy_types, self.weights)[0]
             x, y = choice(list(self.game.gameMap.map_inversed.keys()))
@@ -51,6 +56,7 @@ class ObjectHandler:
             self.add_enemy(enemy(self.game, pos=(x + 0.5, y + 0.5)))
     
     def spawn_potions(self, number):
+        '''spawna poções aleatorias no mapa'''
         for i in range(number):
             x, y = choice(list(self.game.gameMap.map_inversed.keys()))
 
@@ -65,6 +71,7 @@ class ObjectHandler:
     #         self.game.new_game()
 
     def update(self):
+        '''atualiza os objetos do jogo'''
         self.enemy_positions = {enemy.map_pos for enemy in self.enemies_list if enemy.alive}
         [sprite.update() for sprite in self.sprite_list]
         [potion.update() for potion in self.potion_list]
@@ -72,28 +79,36 @@ class ObjectHandler:
         # self.check_win()
     
     def remove_enemies(self):
+        '''remove todos os inimigos do mapa'''
         self.enemies_list = []
 
     def remove_potion(self, x, y):
+        '''remove uma poção do mapa'''
         for i in range(len(self.potion_list)):
             if self.potion_list[i].x == x and self.potion_list[i].y == y:
                 remove = i
         self.potion_list.pop(remove)
 
     def remove_all_potions(self):
+        '''remove todas as poções do mapa'''
         self.potion_list = []
 
     def add_enemy(self, enemy):
+        '''adiciona um inimigo ao mapa'''
         self.enemies_list.append(enemy)
 
     def add_sprite(self, sprite):
+        '''adiciona um sprite ao mapa'''
         self.sprite_list.append(sprite)
 
     def remove_sprite(self, sprite):
+        '''remove um sprite do mapa'''
         self.sprite_list.remove(sprite)
     
     def remove_all_sprites(self):
+        '''remove todos os sprites do mapa'''
         self.sprite_list = []
 
     def add_potion(self, potion):
+        '''adiciona uma poção ao mapa'''
         self.potion_list.append(potion)

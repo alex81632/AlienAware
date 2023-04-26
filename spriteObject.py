@@ -5,8 +5,10 @@ from collections import deque
 
 
 class SpriteObject:
+    '''inicializa o objeto sprite'''
     def __init__(self, game, path='Recursos\static_sprites\candlebra.png',
                  pos=(2, 2), scale=0.7, shift=0.27):
+        '''inicializa o objeto sprite'''
         self.game = game
         self.player = game.player
         self.x, self.y = pos
@@ -20,6 +22,7 @@ class SpriteObject:
         self.sprite_height_shift = shift
 
     def get_sprite_projection(self):
+        '''projeção do sprite'''
         proj = self.game.constants.wall_distance / self.norm_dist * self.sprite_scale # SCREEN_DIST
         proj_width, proj_height = proj * self.image_ratio, proj
 
@@ -32,6 +35,7 @@ class SpriteObject:
         self.game.raycasting.obj_to_render.append((self.norm_dist, image, pos))
 
     def get_sprite(self):
+        '''obtém o sprite'''
         dx = self.x - self.player.x
         dy = self.y - self.player.y
         self.dx, self.dy = dx, dy
@@ -50,12 +54,15 @@ class SpriteObject:
             self.get_sprite_projection()
 
     def update(self):
+        '''atualiza o sprite'''
         self.get_sprite()
 
 
 class AnimatedSprite(SpriteObject):
+    '''inicializa o objeto sprite animado'''
     def __init__(self, game, path="Recursos/animated_sprites/green_light/0.png",
                  pos=(2, 3.5), scale=0.8, shift=0.16, animation_time=120):
+        '''inicializa o objeto sprite animado'''
         super().__init__(game, path, pos, scale, shift)
         self.animation_time = animation_time
         self.path = path.rsplit('/', 1)[0]
@@ -64,16 +71,19 @@ class AnimatedSprite(SpriteObject):
         self.animation_trigger = False
 
     def update(self):
+        '''atualiza o sprite'''
         super().update()
         self.check_animation_time()
         self.animate(self.images)
 
     def animate(self, images):
+        '''anima o sprite'''
         if self.animation_trigger:
             images.rotate(-1)
             self.image = images[0]
 
     def check_animation_time(self):
+        '''verifica o tempo de animação'''
         self.animation_trigger = False
         time_now = pg.time.get_ticks()
         if time_now - self.animation_time_prev > self.animation_time:
@@ -81,6 +91,7 @@ class AnimatedSprite(SpriteObject):
             self.animation_trigger = True
 
     def get_images(self, path):
+        '''obtém as imagens'''
         images = deque()
         for file_name in os.listdir(path):
             if os.path.isfile(os.path.join(path, file_name)):

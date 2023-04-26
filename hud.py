@@ -2,7 +2,9 @@ import pygame as pg
 from constants import Constants
 
 class HUD:
+    '''classe que desenha a HUD na tela'''
     def __init__(self, screen, constants):
+        '''inicializa a classe'''
         self.screen = screen
         self.constants = constants
         self.logo = pg.image.load('assets/images/logo_simplificada.png')
@@ -12,6 +14,7 @@ class HUD:
         self.font_l = pg.font.Font('assets/fonts/dogicapixel.ttf', int(self.constants.font_size))
 
     def draw(self):
+        '''desenha a HUD na tela'''
         # desenhar a logo na tela
         pg.draw.circle(self.screen, (210,0,0), (self.constants.padding+self.scale//2,self.constants.padding+self.scale//2), self.scale*0.8)
         pg.draw.circle(self.screen, (50,50,50), (self.constants.padding+self.scale//2,self.constants.padding+self.scale//2), self.scale*0.7)

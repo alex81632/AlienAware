@@ -1,7 +1,9 @@
 import pygame as pg
 
 class Settings:
+    '''classe que gerencia as configurações do jogo'''
     def __init__(self, screen, constants):
+        '''inicializa as configurações'''
         self.screen = screen
         self.constants = constants
         self.selected = 0
@@ -20,6 +22,7 @@ class Settings:
         self.sound_volume_state = "Ligado" if self.sound_volume > 0 else "Desligado"
 
     def check_events(self):
+        '''checa os eventos do teclado'''
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.constants.running = False
@@ -38,9 +41,11 @@ class Settings:
                     self.handle_selection()
     
     def update(self):
+        '''atualiza o menu'''
         pass
         
     def draw(self):
+        '''desenha o menu'''
         if self.first:
             self.first = False
             # desenhe a imagem na tela
@@ -66,6 +71,7 @@ class Settings:
             self.first = True
 
     def handle_selection(self):
+        '''lida com a seleção do menu'''
         if self.selected == 0:
             # mudar estado do som
             if self.sound_volume > 0:
